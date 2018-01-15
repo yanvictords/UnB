@@ -234,7 +234,7 @@ for(i=0;i<8;i++){
 	printf("%c",resultado);
 
   }
-	arq = fopen("mensagem3.txt", "w+");
+	// arq = fopen("mensagem3.txt", "w+");
 //Convertendo a chave do binario para decimal
 int chavedecimal[8];
 for(i=0;i<8;i++){
@@ -258,7 +258,7 @@ for(i=0;i<8;i++){
 	printf("\n");
 
 	int vetorsuporte[8], vetorbinario[8];
-getchar(); getchar();
+
 printf("caracteres mais frequentes em cada bloco:");
 for(k=0;k<8;k++){
 	n = chavedecimal[k];
@@ -293,10 +293,11 @@ for(k=0;k<8;k++){
 	resultado+= finalxor[0]*2*2*2*2*2*2*2;
 	printf(" %d",resultado);
 }printf("\n");
-arq = fopen("mensagem3.txt", "w+");
-	fprintf(arq, "%c %c %c %c %c %c %c %c", 243, 246, 180, 53, 32, 121, 85, 181);
+/*arq = fopen("mensagem3.txt", "w+");
+	fprintf(arq, "%c %c %c %c %c %c %c %c", 243, 246, 180, 53, 32, 121, 85, 181); */
  
 	fclose(arq);
+	printf("\n\n****Arquivo mensagemfinal.txt gerado com sucesso!!! Abra e veja o resultado.****\n");
 	return 0;
 }
 
