@@ -1,14 +1,14 @@
-// CRIADOR: YAN VICTOR DOS SANTOS, 140033599. PRIMEIRO TRABALHO DE SI.
-
+# Controle de Estoque
 ************PROGRAMA CONTROLE DE ESTOQUE**************
+// YAN VICTOR DOS SANTOS, 140033599.
 
 Objetivo: Este programa tem por finalidade juntar dados de estoque de um arquivo texto "estoque.txt" e calcular o Estoque mínimo para o controle de estoque, gerando um relatorio.
 
 Descrição: O programa recebe como entrada um Código, o nome do Produto, Unidades, demanda em períodos e calcula o total, a média, desvio padrão e o estoque mínimo. O programa contém a consulta On-line, onde o usuário é capaz de consultar informações sobre os produtos, mudar a demanda de algum periodo em run-time, assim como calcular individualmente o total, média, desvio padrão e estoque mínimo de cada produto também em run-time. Também é possível visualizar individualmente a demanda e as unidades de cada produto. O programa pode gerar um relatório no próprio terminal do linux conforme for pedido, mas sempre irá gerar um relatório em formato de arquivo texto com nome "Relatorio.txt".
 
 Como executar: Pelo terminal do linux pelo seguinte comando
-						gcc -ansi -Wall ControleEstoque.c -o estoque -lm
-						./estoque
+gcc -ansi -Wall ControleEstoque.c -o estoque -lm
+./estoque
 
 Observação: Foi usado a biblioteca math.h, logo é necessário acrescenter o -lm no comando do compilador gcc.
 
