@@ -5,7 +5,7 @@ Este pequeno projeto apresenta uma solução simples para decriptação usando c
 gcc vigenere.c -o vigenere <br />
 ./vigenere <br />
 
-- Descrição: O arquivo "mensagem.txt" está criptografado. Seu conteúdo contém apenas números. O programa vigenere.c recebe o conteúdo deste arquivo como entrada, faz a decriptação e gera como saída um novo arquivo chamado "mensagemfinal.txt" contendo a verdadeira mensagem, além de um outro arquivo chamado "chave.txt" contendo a chave.
+- Descrição: O arquivo "mensagem.txt" está criptografado. Seu conteúdo contém apenas números, cuja representação está no formato ASCII. O programa vigenere.c recebe o conteúdo deste arquivo como entrada, faz a decriptação e gera como saída um novo arquivo chamado "mensagemfinal.txt" contendo a verdadeira mensagem, além de um outro arquivo chamado "chave.txt" contendo a chave.
 
 - Metadados: 
 Criptograma gerado por "Cripto_1.exe" a partir do arquivo "m164.txt"
