@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-#define infinito 1000
-#define root 2
+#define infinito 10000
+#define root 0
 //DECLARACOES DE VARIAVEIS
 int nv, na, aresta,a,b,peso, u;
 map<int, vector< pair<int,int> > >  grafo; //[v1] aponta com 'peso' para v2
