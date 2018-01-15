@@ -1,4 +1,4 @@
-# Computação Básica
+# Jogo da Forca
 
 /*YAN VICTOR DOS SANTOS - 140033599 || Professora Carla Koike - Computação básica<br />
 PROGRAMA: JOGO DA FORCA. PALAVRA: "otorrinolaringologista"*<br />
