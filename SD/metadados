@@ -59,9 +59,9 @@ Criptograma gerado por "Cripto_1.exe" a partir do arquivo "m164.txt"
 // 00100000 (32)
 
 // 
-
+teste
 Distribuição de ocorrencias dos 570 caracteres do texto e criptograma:
- A---------------A- TEXTO -------------- ||------- CRIPTOGRAMA -------         
+ ---------------- TEXTO -------------- ||------- CRIPTOGRAMA -------         
   1º- chr( 32) ' ':  87 (prob=0.1526) || chr(148)  18 (prob=0.0316)
   2º- chr( 97) 'a':  73 (prob=0.1281) || chr(149)  17 (prob=0.0298)
   3º- chr(101) 'e':  50 (prob=0.0877) || chr( 65)  16 (prob=0.0281)
