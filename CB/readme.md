@@ -1,7 +1,7 @@
 # Computação Básica
-||YAN VICTOR DOS SANTOS - 140033599  || COMPUTACAO BASICA - CARLA KOIKE - TURMA A||
-RESUMO DO PROGRAMA: O PROGRAMA É UM PROTÓTIPO DO JOGO VERDADEIRO CONHECIDO COMO "TETRIS". O JOGADOR MANIPULARÁ VÁRIAS PEÇAS 
-EMPILHANDO-AS NA PARTE DE BAIXO DO JOGO. GANHA SE CONSEGUIR USAR TODAS AS PEÇAS. PERDE SE AS PEÇAS SE EMPILHAREM ATÉ O LIMITE.
+||YAN VICTOR DOS SANTOS - 140033599  || COMPUTACAO BASICA - CARLA KOIKE - TURMA A||<br />
+RESUMO DO PROGRAMA: O PROGRAMA É UM PROTÓTIPO DO JOGO VERDADEIRO CONHECIDO COMO "TETRIS". O JOGADOR MANIPULARÁ VÁRIAS PEÇAS <br />
+EMPILHANDO-AS NA PARTE DE BAIXO DO JOGO. GANHA SE CONSEGUIR USAR TODAS AS PEÇAS. PERDE SE AS PEÇAS SE EMPILHAREM ATÉ O LIMITE.<br />
 
 DESCRIÇÃO DO PROGRAMA: Ao executar o programa, aparecerá a sua tela inicial. Teclando <enter> poderemos iniciar o jogo. 
 O jogo é composto por '20' peças, onde aparecerá uma de cada vez, de diferentes tamanhos. Os movimentos básicos de cada peça são:
@@ -18,69 +18,69 @@ COMO COMPILAR: O programa "CBETRIS", no Linux, pode ser compilado por GCC e exec
 gcc -ansi -Wall tetris.c -o tetris
 ./jogodaforca
 
---------------- EXEMPLO - GANHANDO O JOGO ----------------
+--------------- EXEMPLO - GANHANDO O JOGO ----------------<br />
 
-***BEM VINDO AO CBETRIS***
+***BEM VINDO AO CBETRIS***<br />
 
-  +--------------------+           PONTUACAO: 200
-  |                    |
-  |                    |
-  |                    |
-  |                    |
-  |                    |
-  |                    |
-=>+                    +<=
-  |                    |
-  |                    |
-  |                    |
-  |          **       &|
-  |          &        &|
-  |          &        &|
-  |* #####  $$$$      &|
-  |*    @@@@   & @@@@@&|
-  +--------------------+
-
-R-rotar D-direita E-esquerda C-cair
-ACAO:
-
-
-**PARABENS, VOCE GANHOU!!!**
-        PONTUAÇÃO: 200
-
-
-Pressione <ENTER> para encerrar
-
---------------- EXEMPLO - PERDENDO O JOGO ----------------
-
-***BEM VINDO AO CBETRIS***
-
-  +--------------------+           PONTUACAO: 100
-  |XXXXXXXXXXXXXXXXXXXX|
-  |XXXXXXXXXXXXXXXXXXXX|
-  |XXXXXXXXXXXXXXXXXXXX|
-  |XXXXXXXXXXXXXXXXXXXX|
-  |XXXXXXXXXXXXXXXXXXXX|
-  |XXXXXXXXXXXXXXXXXXXX|
-=>+XXXXXXXXXXXXXXXXXXXX+<=
-  |XXXXXXXXXXXXXXXXXXXX|
-  |XXXXXXXXXXXXXXXXXXXX|
-  |XXXXXXXXXXXXXXXXXXXX|
-  |XXXXXXXXXXXXXXXXXXXX|
-  |XXXXXXXXXXXXXXXXXXXX|
-  |XXXXXXXXXXXXXXXXXXXX|
-  |XXXXXXXXXXXXXXXXXXXX|
-  |XXXXXXXXXXXXXXXXXXXX|
-  +--------------------+
-
-R-rotar D-direita E-esquerda C-cair
-ACAO:
-
-
-      **GAME OVER**
-        PONTUAÇÃO: 100
-
-
-
-Pressione <ENTER> para encerrar
+  +--------------------+           PONTUACAO: 200<br />
+  |                    |<br />
+  |                    |<br />
+  |                    |<br />
+  |                    |<br />
+  |                    |<br />
+  |                    |<br />
+=>+                    +<=<br />
+  |                    |<br />
+  |                    |<br />
+  |                    |<br />
+  |          **       &|<br />
+  |          &        &|<br />
+  |          &        &|<br />
+  |* #####  $$$$      &|<br />
+  |*    @@@@   & @@@@@&|<br />
+  +--------------------+<br />
+<br />
+R-rotar D-direita E-esquerda C-cair<br />
+ACAO:<br />
+<br />
+<br />
+**PARABENS, VOCE GANHOU!!!**<br />
+        PONTUAÇÃO: 200<br />
+<br />
+<br />
+Pressione <ENTER> para encerrar<br />
+<br />
+--------------- EXEMPLO - PERDENDO O JOGO ----------------<br />
+<br />
+***BEM VINDO AO CBETRIS***<br />
+<br />
+  +--------------------+           PONTUACAO: 100<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+=>+XXXXXXXXXXXXXXXXXXXX+<=<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+  |XXXXXXXXXXXXXXXXXXXX|<br />
+  +--------------------+<br />
+<br />
+R-rotar D-direita E-esquerda C-cair<br />
+ACAO:<br />
+<br />
+<br />
+      **GAME OVER**<br />
+        PONTUAÇÃO: 100<br />
+<br />
+<br />
+<br />
+Pressione <ENTER> para encerrar<br />
 
 
