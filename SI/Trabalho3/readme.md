@@ -15,6 +15,7 @@ gcc prototipo.c -o p
 ./p
 
 Restaurante de simulação:
+
 ------------------- Sobre nos -------------------
 
 
