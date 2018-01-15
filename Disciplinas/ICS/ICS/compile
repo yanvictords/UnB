@@ -1,6 +1,0 @@
-OUTFOLDER=compiledFiles
-mkdir ${OUTFOLDER}
-cd ${OUTFOLDER}
-echo "Compilando MuUtil..."
-java testei2A
-
