@@ -1,1 +1,1 @@
-# Organização e Arquitetura de Computadores.
+# Organização e Arquitetura de Computadores
