@@ -1,11 +1,14 @@
 # Projeto Final da Disciplina - Agrupamento Espectral
 
-//******UNIVERSIDADE DE BRASÍLIA*****************
-//******TAG: 2017/01
-//******ALUNOS: GUILHERME ANDREÚCE - 
-//******ALUNOS: RODRIGO VILAÇA - 14/0031111
-//******ALUNOS: YAN VICTOR - 14/0033599
-//***********************************************
+******UNIVERSIDADE DE BRASÍLIA*****************
+TAG: 2017/01 
+
+ALUNOS: GUILHERME ANDREÚCE - 
+
+ALUNOS: RODRIGO VILAÇA - 14/0031111
+
+ALUNOS: YAN VICTOR - 14/0033599
+***********************************************
 
 
 - Objetivo: Dado um conjunto de dados, deve-se realizar um agrupamento utilizando uma tecnica de agrupamento espectral. Especificamente, deve-se agrupar os registros (instâncias) de um conjunto de dados de acordo com os atributos que os descrevem. Espera-se que instâncias similares em relacao aos seus atributos pertencam ao mesmo grupo, enquanto que instâncias bem diferentes entre si estejam em grupos distintos.
