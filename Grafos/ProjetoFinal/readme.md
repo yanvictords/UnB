@@ -1,15 +1,10 @@
 # Projeto Final da Disciplina - Agrupamento Espectral
 
 //******UNIVERSIDADE DE BRASÍLIA*****************
-
 //******TAG: 2017/01
-
 //******ALUNOS: GUILHERME ANDREÚCE - 
-
 //******ALUNOS: RODRIGO VILAÇA - 14/0031111
-
 //******ALUNOS: YAN VICTOR - 14/0033599
-
 //***********************************************
 
 
