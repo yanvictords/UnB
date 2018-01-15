@@ -1,1 +1,1 @@
-#Disciplina: Organização e Arquitetura de Computadores.
+# Disciplina: Organização e Arquitetura de Computadores.

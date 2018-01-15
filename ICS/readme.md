@@ -1,1 +1,1 @@
-#Disciplina: Introdução à Computação Sônica.
+# Disciplina: Introdução à Computação Sônica.
