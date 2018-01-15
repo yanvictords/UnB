@@ -17,9 +17,13 @@ gcc prototipo.c -o p
 Restaurante de simulação:
 ------------------- Sobre nos -------------------
 
+
 |Outback
+
 |Fone: 61 4002-8922 / 61 3321-3030
+
 |Endereco: SCLS 209 Sul, Bloco B, s/n - 6
+
 
 -------------------------------------------------
 
