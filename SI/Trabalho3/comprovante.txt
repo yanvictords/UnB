@@ -1,10 +1,10 @@
 -------------------------------------------------
 |**COMPROVANTE DE RESERVA**
 |
-|Nome: victor
-|RG: 1233
+|Nome: yan
+|RG: 123
 |Mesa: |1|
-|Data: 30/11
+|Data: 2/3
 |Restaurante Outback
 |Endereco: SCLS 209 Sul, Bloco B, s/n - 6
 -------------------------------------------------
