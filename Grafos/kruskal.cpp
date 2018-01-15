@@ -18,15 +18,16 @@ int main(){
 }
 
 void grafo(){
+	cout << "*********Algoritmo de Kruskal**********\n";
 	printf("Numero de vertices: ");
 	scanf("%d", &num_v);
 	printf("Numero de arestas: ");
 	scanf("%d", &num_a);
-	printf("\nNota: %d vertice(s) indicam o seguinte conjunto [", num_v);
+	printf("\n#Nota: %d vertice(s) indicam o seguinte conjunto de vertices: [", num_v);
 	for(int i=0;i<num_v-1;++i)
 		printf("%d,", i);
 	printf("%d].", num_v-1);
-	printf("\n\nInsira %d aresta(s) no seguinte formato: 'v1' 'v2' 'w' (SEM ASPAS), onde w eh o peso.\n", num_a);
+	printf("\n\n-> Insira %d aresta(s) no seguinte formato: 'v1' 'v2' 'w' (SEM ASPAS), onde w eh o peso.\n", num_a);
 	for(int i=0;i<num_a;++i){
 		scanf("%d %d %d", &a, &b, &peso);
 		g.push_back(make_pair(peso, make_pair(a,b)));
@@ -65,8 +66,8 @@ void init(){
 }
 
 void print(){
-	printf("\n\nA Arvore Geradora Minima contem as seguintes arestas: ");
+	printf("\n\n=> A Arvore Geradora Minima contem as seguintes arestas: ");
 	for(int i=0; i<agm.size();++i)
-		printf("\n[%d]-[%d] com Peso: %d", agm[i].second.first, agm[i].second.second, agm[i].first);
+		printf("\n- Aresta %d: [%d]-[%d] com Peso: %d", i+1, agm[i].second.first, agm[i].second.second, agm[i].first);
 	printf("\n");
 }

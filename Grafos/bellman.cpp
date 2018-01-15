@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+using namespace std;
 #define root 4   //escolha uma raiz
 #define destiny 1 //escolha um destino
 #define infinite 100
@@ -28,6 +29,11 @@ void print_arvore_minima();
 //-----------------------
 int main(){
     cria_grafo();
+    cout << "******Algoritmo de Bellman-Ford******\n";
+    cout << "#Nota: O grafo criado para a simulacao do algoritmo esta no arquivo 'g1.in' .\n\n";
+    cout << "#Nota: A leitura e feita a partir de uma matriz de adjacencia. A primeira linha contem o numero n de vertices, e as proximas n linhas descrevem a matriz.\n\n";
+    cout << "Pressione <Enter> para simular...";
+    getchar();
     if(bellman_ford()){
     	std::cout << "\nArvore gerada...";
     	print_arvore_minima();
@@ -63,7 +69,7 @@ void inicia_cores(){
 //-----------------------
 
 void inicia_valores(){
-    std::cout << "=>Rodando Bellman Ford...\n\n";
+    std::cout << "=> Rodando Bellman Ford...\n\n";
     while(!q.empty())
         q.pop();
     for(int i=0;i<num_v;++i){
@@ -176,7 +182,7 @@ void print(){
 
 //-----------------------
 void print_arvore_minima(){
-        std::cout<<"\n\n=>Arvore Geradora Minima...\n\n";
+        std::cout<<"\n\n=> Arvore Geradora Minima...\n\n";
     for(int i=0;i<num_v;++i){
         if(pv[i]+1==0)
             std::cout<<"Vertice: "<< i+1 << "| Pai: Raiz" << "\n";

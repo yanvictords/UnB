@@ -17,10 +17,19 @@ void print();
 
 //FUNCOES
 int main(){
-
+	cout << "**********ALGORITMO DE PRIM************\n";
+	cout << "Raiz definida: " << root << " #Para alterar, mude o 'define' dentro do código.\n" << "=> Crie o grafo: \n\n";
+	cout << "-> Digite o numero de vertices: ";
 	cin >> nv;
+	cout << "-> Digite o numero de arestas: ";
 	cin >> na;
+	cout << endl << "#Vértices inseridos: ";
+	for(int i=0;i<nv-1;++i)
+		cout << i << ",";
+	cout << nv-1 << "." << endl;
+	cout << endl << "-> Insercao de arestas: " << endl;
 	for(int i=0;i<na;++i){
+		cout << "--> Digite 'a b w', onde 'a' e 'b' são vertices e 'w' o peso da aresta: \n";
 		scanf("%d %d %d", &a,&b, &peso);
 		grafo[a].push_back(make_pair(peso, b));
 		grafo[b].push_back(make_pair(peso, a));
@@ -55,7 +64,6 @@ void MSTPRIM(){
 	while(q.size()){
 		sort(q.begin(), q.end());
 		u=q[0].second;
-		cout << "aqui: "<<u<<endl;
 		q.erase(q.begin(), q.begin()+1);
 		for(int i=0;i<grafo[u].size();++i){
 			if(pertence(grafo[u][i].second) and grafo[u][i].first<key[grafo[u][i].second]){
@@ -68,8 +76,8 @@ void MSTPRIM(){
 //-- 	
 
 void print(){
-	cout << endl;
-	cout << "Grafo: \n";
+	cout << endl << "Criando o grafo G..." << endl << endl;
+	cout << "=> Grafo G criado: \n";
 	for(int i=0;i<nv;++i){
 		cout << i <<" -> ";
 		for(int j=0; j<grafo[i].size();++j){
@@ -79,7 +87,7 @@ void print(){
 	}
 	cout << endl;
 
-	cout << "Arvore gerada: \n";
+	cout << "=> Arvore gerada: \n";
 
 	for(int i=0;i<nv;++i){
 		if(pai[i]==-1)
