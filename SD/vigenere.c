@@ -234,7 +234,8 @@ for(i=0;i<8;i++){
 	printf("%c",resultado);
 
   }
-	// arq = fopen("mensagem3.txt", "w+");
+
+	printf("\n\nCHAVE: %c %c %c %c %c %c %c %c\n\n", 243, 246, 180, 53, 32, 121, 85, 181); 
 //Convertendo a chave do binario para decimal
 int chavedecimal[8];
 for(i=0;i<8;i++){
@@ -293,11 +294,11 @@ for(k=0;k<8;k++){
 	resultado+= finalxor[0]*2*2*2*2*2*2*2;
 	printf(" %d",resultado);
 }printf("\n");
-/*arq = fopen("mensagem3.txt", "w+");
-	fprintf(arq, "%c %c %c %c %c %c %c %c", 243, 246, 180, 53, 32, 121, 85, 181); */
+arq = fopen("chave.txt", "w+");
+	fprintf(arq, "%c %c %c %c %c %c %c %c", 243, 246, 180, 53, 32, 121, 85, 181); 
  
 	fclose(arq);
-	printf("\n\n****Arquivo mensagemfinal.txt gerado com sucesso!!! Abra e veja o resultado.****\n");
+	printf("\n\n****Arquivo mensagemfinal.txt e chave.txt gerados com sucesso!!! Abra e veja o resultado.****\n");
 	return 0;
 }
 
