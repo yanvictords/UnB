@@ -245,7 +245,7 @@ listaDeEventos* txtEventosEmLista(char *str, char* arquivo, char* nomepasta){
 	char pastaprof[300];
 	char arquivos[300];
 	FILE *ev = fopen(arquivo, "r+");
-	char suporte[100]="TrabalhoPS/Arquivos/";
+	char suporte[100]="TP2/Arquivos/";
 	
 /* O codigo a seguir verifica se o diretorio esta com '/' no final antes de adicionar 'TrabalhoPS/Arquivos/'*/
 	int k, l;

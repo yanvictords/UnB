@@ -52,7 +52,7 @@ printf("Antes de tudo, verifique se o diretorio digitado na main.c eh valido. Se
 printf("OBS.: Nao digite no final do seu diretorio '/TrabalhoPS/Arquivos/' !!! Pois o programa fara isso por voce. Um diretorio incorreto pode causar falhas de segmentacao ou erros no arquivo de saida ja que o programa nao podera encontrar os arquivos para a leitura!\n");
 printf("**************---------AVISO------------**************\n");
 
-char diretorio[300] = "/home/yand/Documentos"; /*ALTERE O DIRETORIO PARA O LUGAR ONDE COLOCASTES A PASTA "TrabalhoPS"*/
+char diretorio[300] = "/root/Documentos/UnB/Disciplinas/"; /*ALTERE O DIRETORIO PARA O LUGAR ONDE COLOCASTES A PASTA "TrabalhoPS"*/
 
 	listaDeProjetos* ListaProjetos = txtProjetosEmLista("projetos.txt");
 	listaDeProfessores* ListaProfessores = txtDocentesEmLista("projetos.txt");

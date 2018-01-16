@@ -52,6 +52,7 @@ typedef struct grafo Grafo;
 /* 08 */	void 	GRF_Busca_por_Publicacao(Grafo*, string);
 /* 09 */	void 	GRF_Gerar_Arquivo(Grafo*, string);
 /* 10 */	void 	GRF_Busca_por_Autor(Grafo*, string);
+		void	GRF_filePrint_Lista(PLista, FILE*);
 /* 11 */	Grafo* 	GRF_Criar_Grafo(void);
 /* 12 */	Grafo* 	GRF_Insere_Nova_Publicacao(Grafo*, string, int);
 /* 13 */	Grafo* 	GRF_Remove_Publicacao(Grafo*, string);
@@ -62,7 +63,6 @@ typedef struct grafo Grafo;
 /* 18 */	Grafo* 	GRF_Grafo_Relacionamentos_Projetos(listadeprojetosfinal*);
 /* 19 */	Grafo* 	GRF_Grafo_Relacionamentos_Eventos(listaDeEventosFinal*);
 /* 20 */	Grafo* 	GRF_Grafo_Relacionamentos_Periodicos(listaDePeriodicosFinal*);
-
 /** Funcões genericas **/
 /* 21 */	void GRF_Pause(void);
 
