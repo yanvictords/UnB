@@ -77,8 +77,8 @@ int conta,conta2,conta3,conta4;
 		strcpy(lista1->responsavel, lista2->responsavel);
 		listaDeAlunos*temp1;
 		listaDeProfessores*temp10;					
-		temp1=(listaDeAlunos*)malloc(sizeof(listaDeAlunos));
-		temp10=(listaDeProfessores*)malloc(sizeof(listaDeProfessores));					
+		temp1=(listaDeAlunos*) malloc(sizeof(listaDeAlunos));
+		temp10=(listaDeProfessores*) malloc(sizeof(listaDeProfessores));					
 		temp1=lista3;
 		temp10=lista4;
 		conta=0,conta3=0;
@@ -92,13 +92,15 @@ int conta,conta2,conta3,conta4;
 				temp10=temp10->proximoProfessor;						   										
 			}/*while da verificacao do professor*/ 
 			while(temp1->proximoAluno!=NULL){/*variavel temp que percorre a lista de alunos comparando o nome da lista de alunos com o nome da lista de integrantes da lista 2*/
+
 				if(strstr(lista2->integrante1,temp1->nomeAluno)!=NULL){/*se o nome for igual, ele o salva na lista1-> nomediscente*/
-					char*auxNome2=strstr(lista2->integrante1,temp1->nomeAluno);
+					char *auxNome2=strstr(lista2->integrante1,temp1->nomeAluno);
 					strcpy(lista1->discentes->nomediscente, auxNome2);															
 					conta=1;	
 				}/*terceiro if*/
 				temp1=temp1->proximoAluno;						   										
-			}/*segundo while*/			
+			}/*segundo while*/	
+		
 			if((conta==0)&&(conta3==0)){/*se for 0 eh pq o nome nao foi encontrado na lista de alunos e nem na de professores, entao eh um aluno externo*/										
 				strcpy(lista1->discentesexternos->nomediscenteexterno, lista2->integrante1);																								
 			}/*quarto if*/				
@@ -145,7 +147,6 @@ int conta,conta2,conta3,conta4;
 			}/*quarto if*/					
 				aux->prox=lista1;
 				lista1=aux;
-				
 			return lista1;
 }
 

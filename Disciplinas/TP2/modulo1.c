@@ -94,7 +94,7 @@ listaDeAlunos* txtDiscentesEmLista(char* arquivo_doutorado, char* arquivo_mestra
 	/* variaveis so pra descartar o que nao vai ser usado do arquivo txt */
 	char descarta[200];
 
-	char matricula[10], nome[100];
+	char matricula[10], nome[200];
 
 	fscanf(doutorado, "%[^\n]\n", descarta);
 	fscanf(doutorado, "%[^\n]\n", descarta);
@@ -104,10 +104,9 @@ listaDeAlunos* txtDiscentesEmLista(char* arquivo_doutorado, char* arquivo_mestra
 	fscanf(doutorado, "%[^\n]\n", descarta);
 
 	do{
-		fscanf(doutorado, "            %s    %[^\n]\n", matricula, nome);
+		fscanf(doutorado, "%s %[^\n]\n", matricula, nome);
 		
 		corrigeNome(nome);
-
 		if(matricula[0]!='0' && matricula[0]!='1' && matricula[0]!='2' && matricula[0]!='3')
 			break;
 
@@ -129,7 +128,7 @@ listaDeAlunos* txtDiscentesEmLista(char* arquivo_doutorado, char* arquivo_mestra
 		fscanf(mestrado, "            %s    %[^\n]\n", matricula, nome);
 
 		corrigeNome(nome);
-
+		
 		if(matricula[0]!='0' && matricula[0]!='1' && matricula[0]!='2' && matricula[0]!='3')
 			break;
 
@@ -169,7 +168,7 @@ listaDeProfessores* txtDocentesEmLista(char* arquivo){
 		fscanf(projetos, "%[^\n]\n", descarta);
 		fscanf(projetos, "%[^\n]\n", descarta);
 		fscanf(projetos, "%[^\n]\n", descarta);
-		
+
 		Lista = insereEmListaDeProfessores(Lista, nome, citacao);
 		fscanf(projetos, "1 NOME-COMPLETO = %[^\n]\n2 NOME-COMPLETO = %[^\n]\n3 NOME-COMPLETO = %[^\n]\n\n", nome2, nome3, nome4);
 		corrigeNome2(nome2);
@@ -196,14 +195,14 @@ listaDeProfessores* txtDocentesEmLista(char* arquivo){
 
 listaDeProjetos* txtProjetosEmLista(char* arquivo){
 	FILE* projetos = fopen(arquivo, "r+");
-
+	
 	int anoInicio, mesFim, anoFim;
 	char nomeProjeto[300], situacao[20], natureza[20], descricao[500], nomeIntegrante1[100], nomeIntegrante2[100];
 	char responsavel[100];
 
 	/* Novamente so para descartar informacoes inuteis */
 	char descarta[150];
-
+	
 	listaDeProjetos* Lista = criaListaDeProjetos();
 	do{
 		fscanf(projetos, "%[^\n]\n", descarta);
@@ -218,9 +217,7 @@ listaDeProjetos* txtProjetosEmLista(char* arquivo){
 		fscanf(projetos, "DESCRICAO-DO-PROJETO= %[^\n]\n", descricao);
 		fscanf(projetos, "INTEGRANTES-DO-PROJETO\n");
 		fscanf(projetos, "1 NOME-COMPLETO = %[^\n]\n", responsavel);
-
 		fscanf(projetos, "2 NOME-COMPLETO = %[^\n]\n", nomeIntegrante1);
-
 		fscanf(projetos, "3 NOME-COMPLETO = %[^\n]\n\n", nomeIntegrante2);
 
 		Lista = insereEmListaDeProjetos(Lista, nomeProjeto, anoInicio, mesFim, anoFim, situacao, natureza, descricao, responsavel, nomeIntegrante1, nomeIntegrante2);
@@ -247,7 +244,7 @@ listaDeEventos* txtEventosEmLista(char *str, char* arquivo, char* nomepasta){
 	FILE *ev = fopen(arquivo, "r+");
 	char suporte[100]="TP2/Arquivos/";
 	
-/* O codigo a seguir verifica se o diretorio esta com '/' no final antes de adicionar 'TrabalhoPS/Arquivos/'*/
+/* O codigo a seguir verifica se o diretorio esta com '/' no final antes de adicionar 'TP2/Arquivos/'*/
 	int k, l;
 	k=0;
 	while(str[k]!='\0')k++;
@@ -260,7 +257,7 @@ listaDeEventos* txtEventosEmLista(char *str, char* arquivo, char* nomepasta){
 		str[k]=suporte[l];
 		k++;
 	}
-/* O codigo acima verifica se o diretorio esta com '/' no final antes de adicionar 'TrabalhoPS/trabalho/Arquivos/'*/
+/* O codigo acima verifica se o diretorio esta com '/' no final antes de adicionar 'TP2/trabalho/Arquivos/'*/
 
     diretorioDesktop = opendir(str);
    if( !diretorioDesktop )

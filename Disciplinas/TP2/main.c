@@ -64,11 +64,12 @@ listaDeProjetos* pro = ListaProjetos;
 listaDePeriodicos* per = ListaPeriodicos;
 listaDeEventos* eve = ListaEventos;
 
-
+	
 	while(ListaProjetos!=NULL){
 	listaFinal2 = INSERE_NA_LISTADEPROJETOSFINAL(listaFinal2,ListaProjetos,ListaAlunos,ListaProfessores);
 	ListaProjetos=ListaProjetos->proximoProjeto;
 	}
+
 	listaFinal2=listaFinal2->prox;
 	
 	while(ListaEventos!=NULL){
@@ -91,7 +92,6 @@ listaDeEventos* eve = ListaEventos;
  Relacionamento_Periodico 	= GRF_ListaPeriodicos_Grafo(listaFinal3);
  Relacionamento_Eventos 	= GRF_ListaEventos_Grafo(listaFinal);
  Relacionamento_Projetos 	= GRF_ListaProjetos_Grafo(listaFinal2);
-
 
 
 print(listaFinal, listaFinal2,listaFinal3, Relacionamento_Periodico, Relacionamento_Eventos, Relacionamento_Projetos);
