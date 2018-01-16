@@ -1,0 +1,152 @@
+
++++++++++++++++++++++++++++++++++ PROJETOS +++++++++++++++++++++++++++++++++
+
+NOME COMPLETO = Genaina Nunes Rodrigues	RESPONSAVEL = SIM
+Projetos
+Projeto 1
+NOME = Uso de Cenarios Implicitos no Suporte a Analise de Dependabilidade em Sistemas a Computacionais
+ANO INICIO = 2012
+ANO FIM = 32510
+SITUACAO = EM_ANDAMENTO
+NATUREZA = PESQUISA
+DESCRICAO = Cenarios são uma forma de representar diferentes visões e abstrações do software e descrevem dois aspectos de uma sistema: …
+INTEGRANTES = 
+  DOCENTES: | Rami Bahsoon	RESPONSAVEL = NAO (Docente) | | ALBA CRISTINA MAGALHAES ALVES DE MELO	RESPONSAVEL = NAO (Docente) | 
+  DISCENTES: |  (Discente) | 
+  DISCENTES EXTERNOS: |  (ParticipanteExterno) | 
+NOME COMPLETO = ALBA CRISTINA MAGALHAES ALVES DE MELO	RESPONSAVEL = SIM
+Projetos
+Projeto 2
+NOME = 3B’s Social Adaptive Cloud
+ANO INICIO = 2012
+ANO FIM = 32510
+SITUACAO = EM_ANDAMENTO
+NATUREZA = PESQUISA
+DESCRICAO = This is all about going social into the Cloud infrastructure.
+INTEGRANTES = 
+  DOCENTES: | Genaina Nunes Rodrigues	RESPONSAVEL = NAO (Docente) | 
+  DISCENTES: |  (Discente) | 
+  DISCENTES EXTERNOS: | Vander Ramos Alves	RESPONSAVEL = NAO (ParticipanteExterno) | |  (ParticipanteExterno) | 
+NOME COMPLETO = Genaina Nunes Rodrigues	RESPONSAVEL = SIM
+Projetos
+Projeto 3
+NOME = Uso de Cenarios Implicitos no Suporte a Analise de Dependabilidade em Sistemas a Computacionais
+ANO INICIO = 2012
+ANO FIM = 32510
+SITUACAO = EM_ANDAMENTO
+NATUREZA = PESQUISA
+DESCRICAO = Cenarios são uma forma de representar diferentes visões e abstrações do software e descrevem dois aspectos de uma sistema: …
+INTEGRANTES = 
+  DOCENTES: | Rami Bahsoon	RESPONSAVEL = NAO (Docente) | | ALBA CRISTINA MAGALHAES ALVES DE MELO	RESPONSAVEL = NAO (Docente) | 
+  DISCENTES: | »)?˛~ (Discente) | 
+  DISCENTES EXTERNOS: |  (ParticipanteExterno) | 
+
+
+
+
++++++++++++++++++++++++++++++++++ PERIODICOS +++++++++++++++++++++++++++++++++
+
+
+*PUBLICACAO EM PERIODICO*
+NOME COMPLETO = Genaina Nunes Rodrigues
+------------------------------------------------------------------
+TITULO = "Border Effect Analysis for Reliability Assurance and Continuous Connectivity of Wireless Sensor Networks in the Presence of Sensor Failures" 
+ANO DE PUBLICACAO: 2014
+
+ORDEM       CATEGORIA                AUTORES:
+1           Docente                  Genaina Nunes Rodrigues (Docente)
+2           Docente                   (Docente)
+3           Discente                  (Discente)
+4           Participante Externo     tK?˛ (ParticipanteExterno)
+5           Participante Externo      (ParticipanteExterno)
+
+
+NATUREZA: "COMPLETO"
+NOME DA EDITORA: "IEEE Transactions on Wireless Communications"
+IDIOMA: "Inglês"
+VOLUME: "13"
+SERIE: ""
+NUMERO DA PAGINA INICIAL: "4232"
+NUMERO DA PAGINA FINAL: 
+
+
+
+
++++++++++++++++++++++++++++++ LISTA DE EVENTOS +++++++++++++++++++++++++++++
+
+
+*PUBLICACAO EM EVENTOS*
+NOME COMPLETO = Genaina Nunes Rodrigues
+------------------------------------------------------------------
+TITULO = "Modelling and analysing contextual failures for dependability requirements" 
+ANO = 2014
+
+ORDEM       CATEGORIA                AUTORES:
+1           Docente                  Genaina Nunes Rodrigues (Docente)
+2           Docente                   (Docente)
+3           Discente                  (Discente)
+4           Participante Externo     ALI, RAIAN (ParticipanteExterno)
+5           Participante Externo     MENDONCA, DANILO F. (ParticipanteExterno)
+6           Participante Externo      (ParticipanteExterno)
+
+
+NATUREZA = "COMPLETO" 
+PAIS: "Estados Unidos" 
+IDIOMA: "Inglês" 
+NOME DO EVENTO: "the 9th International Symposium on Software Engineering for Adaptive and Self-Managing Systems" 
+PROCEEDINGS: "Proceedings of the 9th International Symposium on Software Engineering for Adaptive and Self-Managing Systems - SEAMS 2014"
+VOLUME: ""
+NUMERO DA PAGINA INICIAL: "55"
+NUMERO DA PAGINA FINAL: ""
+
+
+
+*PUBLICACAO EM EVENTOS*
+NOME COMPLETO = Genaina Nunes Rodrigues
+------------------------------------------------------------------
+TITULO = "Reliability Analysis of Concurrent Systems using LTSA" 
+ANO = 2007
+
+ORDEM       CATEGORIA                AUTORES:
+1           Docente                  Genaina Nunes Rodrigues (Docente)
+2           Docente                   (Docente)
+3           Discente                  (Discente)
+4           Participante Externo     Jonas Wolf (ParticipanteExterno)
+5           Participante Externo     David S. Rosenblum (ParticipanteExterno)
+6           Participante Externo      (ParticipanteExterno)
+
+
+NATUREZA = "RESUMO_EXPANDIDO" 
+PAIS: "Estados Unidos" 
+IDIOMA: "Inglês"
+NOME DO EVENTO: "International Conference on Software Engineering"
+PROCEEDINGS: Proc
+VOLUME: ""
+NUMERO DA PAGINA INICIAL: "63"
+NUMERO DA PAGINA FINAL: "64"
+
+
+------------------Grafo de Relacionamentos-----------------
+
+
+Quantidade de Publicacoes: 1
+
+"IEEE Transactions on Wireless Communications":
+Genaina Nunes Rodrigues: Genaina Nunes Rodrigues (Docente).  . tK?˛ . 
+
+Quantidade de Publicacoes: 2
+
+"Modelling and analysing contextual failures for dependability requirements" :
+Genaina Nunes Rodrigues: Genaina Nunes Rodrigues (Docente).  . ALI, RAIAN . MENDONCA, DANILO F. . 
+
+"Reliability Analysis of Concurrent Systems using LTSA" :
+Genaina Nunes Rodrigues: Genaina Nunes Rodrigues (Docente).  . Jonas Wolf . David S. Rosenblum . 
+
+Quantidade de Publicacoes: 2
+
+Uso de Cenarios Implicitos no Suporte a Analise de Dependabilidade em Sistemas a Computacionais:
+Genaina Nunes Rodrigues	RESPONSAVEL = SIM: Rami Bahsoon	RESPONSAVEL = NAO (Docente).  .  . ALBA CRISTINA MAGALHAES ALVES DE MELO	RESPONSAVEL = NAO . »)?˛~ . 
+
+3B’s Social Adaptive Cloud:
+ALBA CRISTINA MAGALHAES ALVES DE MELO	RESPONSAVEL = SIM: Genaina Nunes Rodrigues	RESPONSAVEL = NAO (Docente).  . Vander Ramos Alves	RESPONSAVEL = NAO . 
+
