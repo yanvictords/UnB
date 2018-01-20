@@ -1,7 +1,7 @@
 # Tecnologia Musical Básica
 
-- .sco: Definição de instrumentos musicais. <br />
-- .orc: Definição da melodia.<br />
+- .sco: Definição da melodia. <br />
+- .orc: Definição de instrumentos musicais.<br />
 - .csd: .sco + .orc
 - Execução:
 1) Instale Csound, uma linguagem de programação para sons, através do comando:<br />
