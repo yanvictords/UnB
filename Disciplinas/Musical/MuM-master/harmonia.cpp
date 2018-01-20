@@ -1,8 +1,8 @@
 #include "MuMaterial.h"
 #include <stdio.h>
-
+using namespace std;
+#define PATH "/root/Documentos/UnB/Disciplinas/Musical/MuM-master/"
 void EscolheHarmonia(int numerocompassos, int acordeescolhido[], MuMaterial compassos);
-
 int main (){
 	
 MuInit();
@@ -11,7 +11,7 @@ float tempototal;
 int i=0, numerocompassos; //numerocompassos eh o numero de compassos que a melodia possui, assim sabemos quantas notas usaremos na harmonizacao
 
 
-melodia.LoadScore("/home/yan/Documentos/Musical/MuM-master/melodia1.sco");
+melodia.LoadScore((string) PATH + "melodia1.sco");
 tempototal = melodia.Dur();
 numerocompassos = tempototal/2;
 cout << tempototal << endl;
@@ -71,10 +71,10 @@ for (i=0;i<numerocompassos;i++){
 
 harmonia.Mix(1,melodia,0);
 harmonia.Show();
-harmonia.PlaybackWithCsound("/home/yan/Documentos/Musical/MuM-master/teste");
+harmonia.PlaybackWithCsound((string) PATH + "teste");
 harmonia.SetDefaultFunctionTables();
-	harmonia.Orchestra("/home/yan/Documentos/Musical/MuM-master/Saida");
-	harmonia.Score("/home/yan/Documentos/Musical/MuM-master/Saida");
+	harmonia.Orchestra((string) PATH + "Saida");
+	harmonia.Score((string) PATH + "Saida");
 return 0;
 
 }

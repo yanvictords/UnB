@@ -12,15 +12,16 @@ csound NomeDoArquivo.csd<br />
 <br />
 
 => O projeto desta disciplina explora composição musical por meio do uso do computador, simulando técnicas de improviso implementadas por meio de regras pré-definidas, baseando-se em teoria musical. Desenvolvemos 4 trabalhos e um projeto final. Todos os exercícios geram uma melodia em formato .csd ou .sco e .orc. A ideia é gerar este produto final e escutá-lo por meio do Csound. <br />
+- Harmonia: Teste de harmonia simples.
 - Trabalho 1: Gerador e modificador de motivo simples.<br />
 - Trabalho 2: Cantus firmus e contraponto.<br />
 - Trabalho 3: Adição de acordes em melodia pronta.<br />
 - Trabalho 4: Adição de melodia em sequência de acordes pronta.<br />
-- Projeto Final: Trabalho 3 e 4 juntos. Usuário insere uma sequência de acordes quaisquer, e o programa deve se adaptar a esta sequência e gerar uma melodia com Trompete e Piano.<br />
+- Projeto Final: Trabalho 3 e 4 juntos. Usuário insere uma sequência de acordes quaisquer, e o programa deve se adaptar a esta sequência e gerar uma melodia com mais de um instrumento solo.<br />
 - Execução de trabalhos e projeto final:<br />
 1) Altere a variável "MAIN" dentro do arquivo "compile" na primeira linha, para o nome do arquivo que deseja executar.<br />
 Exemplo: "MAIN=trabalho3" (Obs.: Não precisa adicionar .cpp). <br />
-2) Atenção: Altere nos arquivos "trabalho1.cpp", "trabalho2.cpp", "trabalho3.cpp", "trabalho4.cpp", "ProjetoFinalv1.cpp", "ProjetoFinalv2.cpp" e "ProjetoFinalOficial.cpp" o diretório definido no #define PATH "diretorio" de acordo com o seu diretório. Ex.:<br />
+2) Atenção: Altere nos arquivos "harmonia.cpp", "trabalho1.cpp", "trabalho2.cpp", "trabalho3.cpp", "trabalho4.cpp", "ProjetoFinalv1.cpp", "ProjetoFinalv2.cpp" e "ProjetoFinalOficial.cpp" o diretório definido no #define PATH "diretorio" de acordo com o seu diretório. Ex.:<br />
 '#define PATH "/user/Documentos/UnB/Disciplinas/Musical/MuM-master/"'<br />
 Nota: Sempre deixe '/' no final do diretório.<br />
 3) Execute: <br />

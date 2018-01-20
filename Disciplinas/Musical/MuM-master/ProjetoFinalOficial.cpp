@@ -37,8 +37,8 @@ int main(void){
 
 	int i, num_comp;// num. de compassos e probabilidades 
 	
-	afinal.LoadOrchestra("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/TrompetePiano.orc");
-    afinal.LoadFunctionTables("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/TrompetePiano.tbl");
+	//afinal.LoadOrchestra("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/TrompetePiano.orc");
+        //afinal.LoadFunctionTables("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/TrompetePiano.tbl");
 
 
 	acordesA.SetInstrument(0,1);
