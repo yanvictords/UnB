@@ -30,8 +30,9 @@ chmod 755 compile<br />
 ./compile<br />
 ./NomeDoArquivoDefinidoNaVariavelMain (Exemplo: ./trabalho3)<br />
 
-4) Provavelmente a música irá tocar automaticamente. Porém, recomenda-se executar o seguinte comando para tocar:<br />
-csound Saida.orc Saida.sco -odac<br />
+4) Por fim, provavelmente a música irá tocar automaticamente. Porém, recomenda-se executar o seguinte comando para tocar:<br />
+csound Saida.orc Saida.sco -odac, ou<br />
+csound teste.csd -odac<br />
 Nota: Caso queira gerar um arquivo .wav, retire a diretiva -odac do comando acima.
 
 
