@@ -11,7 +11,7 @@ sudo apt-get install csound<br />
 csound NomeDoArquivo.csd<br />
 <br />
 
-=> O projeto desta disciplina explora composição musical por meio do uso de computadores, simulando técnicas de improviso implementadas por meio de regras pré-definidas, baseando-se em teoria musical. Desenvolvemos 4 trabalhos e um projeto final. Todos os exercícios geram uma melodia em formato .csd ou .sco e .orc. A ideia é gerar este produto final e escutá-lo por meio do csound. <br />
+=> O projeto desta disciplina explora composição musical por meio do uso de computadores, simulando técnicas de improviso implementadas por meio de regras pré-definidas, baseando-se em teoria musical. Desenvolvemos 4 trabalhos e um projeto final. Todos os exercícios geram uma melodia em formato .csd ou .sco e .orc. A ideia é gerar este produto final e escutá-lo por meio do Csound. <br />
 - Trabalho 1: Gerador e modificador de motivo simples.<br />
 - Trabalho 2: Cantus firmus e contraponto.<br />
 - Trabalho 3: Adição de acordes em melodia pronta.<br />
