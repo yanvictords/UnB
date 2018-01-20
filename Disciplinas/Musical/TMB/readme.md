@@ -6,7 +6,6 @@
 - Execução:
 1) Instale Csound, uma linguagem de programação para sons, através do comando:<br />
 sudo apt-get install csound<br />
-<br />
 2) Execute:<br />
 csound NomeDoArquivo.csd<br />
 <br />
