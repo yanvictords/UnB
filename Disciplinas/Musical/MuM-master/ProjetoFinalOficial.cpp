@@ -1,7 +1,7 @@
 #include <iostream>
 #include "MuMaterial.h"
 using namespace std;
-
+#define PATH "/root/Documentos/UnB/Disciplinas/Musical/MuM-master/"
 
 const int MAX_MOTIF = 20;
 
@@ -37,8 +37,8 @@ int main(void){
 
 	int i, num_comp;// num. de compassos e probabilidades 
 	
-	//afinal.LoadOrchestra("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/TrompetePiano.orc");
-        //afinal.LoadFunctionTables("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/TrompetePiano.tbl");
+	//afinal.LoadOrchestra((string) PATH + "TrompetePiano.orc");
+        //afinal.LoadFunctionTables((string) PATH + "TrompetePiano.tbl");
 
 
 	acordesA.SetInstrument(0,1);
@@ -188,10 +188,10 @@ int main(void){
 	nota.SetPitch(estrutural(melodiaA,auxiliar,-1));
 	afinal.AddNote(1,nota);
 	afinal.Show();
-	afinal.PlaybackWithCsound("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/teste");
+	afinal.PlaybackWithCsound((string) PATH + "teste");
 	afinal.SetDefaultFunctionTables();
-	afinal.Score("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/Saida");
-	afinal.Orchestra("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/Saida");
+	afinal.Score((string) PATH + "Saida");
+	afinal.Orchestra((string) PATH + "Saida");
 	
 	delete[] melodiaA;
 	delete[] melodiaB;
