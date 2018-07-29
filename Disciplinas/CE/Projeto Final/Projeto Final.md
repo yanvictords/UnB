@@ -1,0 +1,4 @@
+# Computação Experimental
+Projeto: O projeto pode ser realizado individualmente ou em grupo de até 2 alunos. O trabalho deverá desenvolver um projeto experimental, de<br /> maneira sistemática, de acordo com o método científico. O projeto poderá usar temas de outras disciplinas.<br />
+
+Entretanto, tem de ser um projeto novo e não algo já apresentado em outra disciplina. Pode aproveitar trabalhos iniciados em outras disciplinas,<br /> mas tem necessariamente de incluir os conhecimentos deste curso. Em particular, o projeto experimental realizado deve incluir no<br /> mínimo três das classes de técnicas apresentadas no curso (caracterização de cargas, comparação de sistemas com Intervalos de Confiança e<br /> teste-t, modelos de regressão, projetos fatoriais, projetos de um fator, etc).  <br />
