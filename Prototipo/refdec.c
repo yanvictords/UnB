@@ -1,12 +1,12 @@
 // UNIVERSIDADE DE BRASÍLIA - 2018/2
 // YAN VICTOR DOS SANTOS
-// addr_cliente DE TESTE 
+// PROXY DE TESTE 
 
 #include "refdec.h"
 
 struct sockaddr_in addr_cliente; // usado para o addr_cliente
 struct sockaddr_in addr_remoto; // usado em accept para ouvir cliente
-struct sockaddr_in addr_serv; // usado para pedir conexão ao addr_servidor final
+struct sockaddr_in addr_serv; // usado para pedir conexão ao servidor final
 #define _PORTA 2001
 #define _PORTASERV 8080
 #define LEN 4096
@@ -42,7 +42,7 @@ int main()
 	else
 		printf("Porta %d foi aberta com sucesso!\n", _PORTA);
 
-//=========================================================== CRIAÇÃO DE SOCKET E PORTA PARA SE CONECTAR AO addr_servIDOR FINAL
+//=========================================================== CRIAÇÃO DE SOCKET E PORTA PARA SE CONECTAR AO SERVIDOR FINAL
 
 	if((sck_servidor = socket(AF_INET, SOCK_STREAM, 0)) == -1) 
 	{
@@ -52,20 +52,20 @@ int main()
 	else // caso tenha conseguido criar o socket
 		printf("O socket final foi criado com sucesso!\n");
 
-//--- configurações do addr_servidor final
+//--- configurações do servidor final
 	addr_serv.sin_family = 		AF_INET;
 	addr_serv.sin_port = 		htons(_PORTASERV);
 	addr_serv.sin_addr.s_addr = 		inet_addr("127.0.0.1");
 	memset(addr_serv.sin_zero, 0x0, 8);
-//--- fim das configurações do addr_servidor final
+//--- fim das configurações do servidor final
 
 	if(connect(sck_servidor, (struct sockaddr*)&addr_serv, len_servidor)==-1)
 	{
-		perror("O addr_servidor final nao conectou!\n");	
+		perror("O servidor final nao conectou!\n");	
 		exit(1);
 	}
 	else
-		perror("Conexao com o addr_servidor final feita com sucesso!");
+		perror("Conexao com o servidor final feita com sucesso!");
 
 //=========================================================== PROXY ONLINE... ESPERA POR CLIENTE
 

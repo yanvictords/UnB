@@ -1,3 +1,7 @@
+// UNIVERSIDADE DE BRASÍLIA - 2018/2
+// YAN VICTOR DOS SANTOS
+// SERVIDOR DE TESTE
+
 #include "refdec.h"
 
 struct sockaddr_in servidor;
