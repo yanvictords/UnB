@@ -110,7 +110,8 @@ int main()
 			buffer[tam_msg] = '\0';
 			printf("\n=> Mensagem recebida do cliente: %s\n", buffer);
 			printf("Enviando para o servidor final...\n");
-
+			char *ip = inet_ntoa(addr_cliente.sin_addr);
+			printf("Cliente: %s\n\n", ip);
 			//if(verifica_tabela() == OK) {
 
 			if(send(sck_servidor, buffer, strlen(buffer), 0)) // repassa o pedido ao servidor
