@@ -76,8 +76,10 @@ int main()
 			}
 		} //AQUI ELE VOLTA PARA LOOP INFINITO, E VAI PARA O RECV FICAR TRAVADO ESPERANDO OUTRA MENSAGEM DO CLIENTE.
 	}
+
 	close(proxy);
 	close(sck_servidor);
+
 	printf("\n\nFinalizando o servidor...\n");
 	return 0;
 }

@@ -4,13 +4,14 @@
 
 #include "refdec.h"
 
-struct sockaddr_in addr_cliente; // usado para o addr_cliente
-struct sockaddr_in addr_serv; // usado para pedir conexão ao servidor final
-//struct sockaddr_in addr_remoto; // usado em accept para ouvir cliente - TCP
-
-#define _PORTA 2001
-#define _PORTASERV 8080
+#define _PORTA_CLIENTE 2001
+#define _PORTA_SERV 8080
+#define _IP_SERVIDOR "127.0.0.1"
 #define LEN 4096
+
+struct sockaddr_in addr_cliente; // usado para o addr_cliente
+struct sockaddr_in addr_serv; // usado para pedir conexão ao servidor finals
+
 int main()
 {
 	int sck_cliente, sck_servidor; // soquetes
@@ -21,18 +22,19 @@ int main()
 
 //=========================================================== CRIAÇÃO DE SOCKET E PORTA PARA SE CONECTAR AO SERVIDOR FINAL - TCP
 	sck_servidor = socket(AF_INET, SOCK_STREAM, 0); //TCP
+
 	if(sck_servidor == -1) 
 	{
 		perror("PROXY: O socket final nao foi criado com sucesso!\n");
 		exit(1);	
 	}
-	else // caso tenha conseguido criar o socket
+	else
 		printf("O socket final foi criado com sucesso!\n");
 
 //--- configurações do servidor final
 	addr_serv.sin_family = 		AF_INET;
-	addr_serv.sin_port = 		htons(_PORTASERV);
-	addr_serv.sin_addr.s_addr = 		inet_addr("127.0.0.1");
+	addr_serv.sin_port = 		htons(_PORTA_SERV);
+	addr_serv.sin_addr.s_addr = 		inet_addr(_IP_SERVIDOR);
 	memset(addr_serv.sin_zero, 0x0, 8);
 //--- fim das configurações do servidor final
 
@@ -49,16 +51,18 @@ int main()
 
 //=========================================================== CRIAÇÃO DE SOCKET E PORTA PARA OUVIR O CLIENTE - UDP
 	sck_cliente = socket(AF_INET, SOCK_DGRAM, 0); //UDP
+
 	if(sck_cliente == -1) 
 	{
 		perror("PROXY: O socket nao foi criado com sucesso!\n");
 		exit(1);	
 	}
-	else // caso tenha conseguido criar o socket
+	else
 		printf("O socket com o cliente foi criado com sucesso!\n");
+
 //--- configurações do addr_cliente
 	addr_cliente.sin_family =		AF_INET; // para linux
-	addr_cliente.sin_port = 		htons(_PORTA); // porta de escuta para bind()
+	addr_cliente.sin_port = 		htons(_PORTA_CLIENTE); // porta de escuta para bind()
 	memset(addr_cliente.sin_zero, 0x0, 8);
 //--- fim das configurações do addr_cliente
 
@@ -67,18 +71,18 @@ int main()
 
 	if(bind(sck_cliente, cast_addr_cliente, tam_addr_cliente) == -1) // tenta associar o socket a uma porta
 	{
-		printf("Erro ao abrir a porta %d!\n", _PORTA);
+		printf("Erro ao abrir a porta %d!\n", _PORTA_CLIENTE);
 		exit(1);
 	}
 	else
-		printf("Porta %d foi aberta com sucesso!\n", _PORTA);
+		printf("Porta %d foi aberta com sucesso!\n", _PORTA_CLIENTE);
 
 //=========================================================== PROXY ONLINE... ESPERA POR CLIENTE
-	printf("\n Esperando por mensagem UDP...\n");
+	printf("\n Esperando por mensagens: UDP...\n");
 
 //=========================================================== RECEBE DO CLIENTE, ENVIA AO SERVIDOR E REENVIA A RESPOSTA
 
-	while(1) // espera em loop a mensagem do cliente
+	while(1)
 	{
 		memset(buffer, 0x0, LEN);
 		if((tam_msg = recvfrom(sck_cliente, buffer, LEN, 0, cast_addr_cliente, &tam_addr_cliente)) > 0) // mensagem recebida > 0
@@ -92,11 +96,8 @@ int main()
 			if(send(sck_servidor, buffer, strlen(buffer), 0)) // repassa o pedido ao servidor
 			{
 				if(!strcmp(buffer, "exit")) // se a mensagem for exit, fecha a conexão
-				{
-					close(sck_cliente); // fecha a conexão com o cliente
-					close(sck_servidor); // fecha a conexão com o servidor
 					break;
-				}
+
 				printf("Aguardando resposta do servidor...");
 				if((tam_msg = recv(sck_servidor, resposta, LEN, 0)) > 0) // se o servidor responder
 				{
@@ -120,6 +121,7 @@ int main()
 	}
 
 	close(sck_cliente); // fecha o socket que recebe mensagens de cliente
+	close(sck_servidor); // fecha o socket da conexão com o servidor
 
 	printf("\n\nFinalizando o proxy...\n");
 	return 0;

@@ -13,7 +13,6 @@ int main()
 
 	printf("================ CLIENTE =================\n\n");
 
-	printf("Sou um cliente\n");
 	int sockfd = socket(AF_INET, SOCK_DGRAM, 0); //UDP
 	int len = sizeof(remoto);
 	int slen;
@@ -45,6 +44,7 @@ int main()
 		{
 			if(!strcmp(buffer, "exit"))
 				break;
+
 			printf("Aguardando resposta do servidor...\n");
 		}
 		else
@@ -57,7 +57,6 @@ int main()
 	}
 	
 	close(sockfd);
-	printf("Cliente encerrado!\n");
 
 	printf("\n\nFinalizando o cliente...\n");
 	return 0;
