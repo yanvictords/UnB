@@ -14,7 +14,7 @@ int main()
 	printf("================ CLIENTE =================\n\n");
 
 	printf("Sou um cliente\n");
-	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	int sockfd = socket(AF_INET, SOCK_DGRAM, 0); //UDP
 	int len = sizeof(remoto);
 	int slen;
 	char buffer[LEN];
@@ -33,27 +33,15 @@ int main()
 	remoto.sin_addr.s_addr = inet_addr("127.0.0.1");
 	memset(remoto.sin_zero, 0x0, 8);
 
-	if(connect(sockfd, (struct sockaddr*)&remoto, len)==-1)
-	{
-		perror("O servidor nao conectou!\n");	
-		exit(1);
-	}
-	else
-	{
-		perror("Conexao feita com sucesso!");
-	}
+	struct sockaddr *cast_remoto = (struct sockaddr *) &remoto;
+	int tam_addr_remoto = sizeof(remoto);
 
 	while(1)
 	{
-		if((slen = recv(sockfd, buffer, LEN, 0)) > 0) // Na primeira vez, espera a mensagem de bem-vindo do proxy; Recebe pedidos do proxy
-		{
-			buffer[slen] = '\0';
-			printf("\n=> Mensagem Recebida do proxy: %s\n", buffer);
-		}
 		memset(buffer, 0x0, LEN);
 		printf("Peca algo ao servidor: ");
 		scanf("%s", buffer);
-		if(send(sockfd, buffer, strlen(buffer), 0)) // faz um pedido ao proxy
+		if(sendto(sockfd, buffer, strlen(buffer), 0, cast_remoto, tam_addr_remoto)) // faz um pedido ao proxy
 		{
 			if(!strcmp(buffer, "exit"))
 				break;
@@ -61,7 +49,11 @@ int main()
 		}
 		else
 			printf("O servidor nao recebeu a mensagem...\n");
-		
+		if((slen = recvfrom(sockfd, buffer, LEN, 0, cast_remoto, &tam_addr_remoto)) > 0) // Na primeira vez, espera a mensagem de bem-vindo do proxy; Recebe pedidos do proxy
+		{
+			buffer[slen] = '\0';
+			printf("\n=> Mensagem Recebida do proxy: %s\n", buffer);
+		}
 	}
 	
 	close(sockfd);

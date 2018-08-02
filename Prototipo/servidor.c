@@ -54,6 +54,7 @@ int main()
 
 	while(1) // A PARTIR DAQUI OCORREM AS TROCAS DE MENSAGENS
 	{ 
+		memset(buffer, 0x0, LEN);
 		if((tam_buff = recv(proxy, buffer, LEN, 0)) > 0) // *RECV: FICA TRAVADO AQUI ATÉ RECEBER UMA MENSAGEM DO CLIENTE (proxy), salva em "buffer"
 		{
 			printf("=> Mensagem recebida do proxy: %s\n\n", buffer);
