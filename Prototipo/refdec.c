@@ -2,16 +2,28 @@
 // YAN VICTOR DOS SANTOS
 // PROXY DE TESTE 
 
+//=============
+//==INCLUDE'S==
+//=============
 #include "refdec.h"
 
+//============
+//==DEFINE'S==
+//============
 #define _PORTA_CLIENTE 2001
 #define _PORTA_SERV 8080
 #define _IP_SERVIDOR "127.0.0.1"
 #define LEN 4096
 
+//=============
+//==VARIÁVEIS==
+//=============
 struct sockaddr_in addr_cliente; // usado para o addr_cliente
 struct sockaddr_in addr_serv; // usado para pedir conexão ao servidor finals
 
+//===========
+//==FUNÇÕES==
+//===========
 int main()
 {
 	int sck_cliente, sck_servidor; // soquetes
@@ -20,7 +32,9 @@ int main()
 
 	printf("================ PROXY =================\n\n");
 
-//=========================================================== CRIAÇÃO DE SOCKET E PORTA PARA SE CONECTAR AO SERVIDOR FINAL - TCP
+//===================================================================
+// CRIAÇÃO DE SOCKET E PORTA PARA SE CONECTAR AO SERVIDOR FINAL: TCP
+//===================================================================
 	sck_servidor = socket(AF_INET, SOCK_STREAM, 0); //TCP
 
 	if(sck_servidor == -1) 
@@ -31,12 +45,12 @@ int main()
 	else
 		printf("O socket final foi criado com sucesso!\n");
 
-//--- configurações do servidor final
+//=== configurações do servidor final
 	addr_serv.sin_family = 		AF_INET;
 	addr_serv.sin_port = 		htons(_PORTA_SERV);
 	addr_serv.sin_addr.s_addr = 		inet_addr(_IP_SERVIDOR);
 	memset(addr_serv.sin_zero, 0x0, 8);
-//--- fim das configurações do servidor final
+//=== fim das configurações do servidor final
 
 	struct sockaddr *cast_addr_serv = (struct sockaddr *) &addr_serv; // cast do endereço para struct genérica
 	int tam_addr_servidor = sizeof(addr_serv); // tamanho da struct
@@ -49,7 +63,9 @@ int main()
 	else
 		perror("Conexao com o servidor final feita com sucesso!");
 
-//=========================================================== CRIAÇÃO DE SOCKET E PORTA PARA OUVIR O CLIENTE - UDP
+//=====================================================
+// CRIAÇÃO DE SOCKET E PORTA PARA OUVIR O CLIENTE: UDP
+//===================================================== 
 	sck_cliente = socket(AF_INET, SOCK_DGRAM, 0); //UDP
 
 	if(sck_cliente == -1) 
@@ -60,11 +76,11 @@ int main()
 	else
 		printf("O socket com o cliente foi criado com sucesso!\n");
 
-//--- configurações do addr_cliente
+//=== configurações do addr_cliente
 	addr_cliente.sin_family =		AF_INET; // para linux
 	addr_cliente.sin_port = 		htons(_PORTA_CLIENTE); // porta de escuta para bind()
 	memset(addr_cliente.sin_zero, 0x0, 8);
-//--- fim das configurações do addr_cliente
+//=== fim das configurações do addr_cliente
 
 	struct sockaddr *cast_addr_cliente = (struct sockaddr *) &addr_cliente; // cast do endereço para struct genérica
 	int tam_addr_cliente = sizeof(addr_cliente); // tamanho da struct
@@ -77,10 +93,14 @@ int main()
 	else
 		printf("Porta %d foi aberta com sucesso!\n", _PORTA_CLIENTE);
 
-//=========================================================== PROXY ONLINE... ESPERA POR CLIENTE
+//====================================
+// PROXY ONLINE... ESPERA POR CLIENTE
+//====================================
 	printf("\n Esperando por mensagens: UDP...\n");
 
-//=========================================================== RECEBE DO CLIENTE, ENVIA AO SERVIDOR E REENVIA A RESPOSTA
+//===========================================================
+// RECEBE DO CLIENTE, ENVIA AO SERVIDOR E REENVIA A RESPOSTA
+//===========================================================
 
 	while(1)
 	{
@@ -119,6 +139,10 @@ int main()
 			}
 		}
 	}
+
+//==========================
+// ENCERRAMENTO DO PROGRAMA
+//==========================
 
 	close(sck_cliente); // fecha o socket que recebe mensagens de cliente
 	close(sck_servidor); // fecha o socket da conexão com o servidor
