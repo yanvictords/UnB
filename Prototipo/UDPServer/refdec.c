@@ -11,7 +11,7 @@
 //==DEFINE'S==
 //============
 #define _PORTA_CLIENTE 2001
-#define _PORTA_SERV 8080
+#define _PORTA_SERV 8081
 #define _IP_SERVIDOR "127.0.0.1"
 #define LEN 4096
 
@@ -35,7 +35,7 @@ int main()
 //===================================================================
 // CRIAÇÃO DE SOCKET E PORTA PARA SE CONECTAR AO SERVIDOR FINAL: TCP
 //===================================================================
-	sck_servidor = socket(AF_INET, SOCK_STREAM, 0); //TCP
+	sck_servidor = socket(AF_INET, SOCK_DGRAM, 0); //TCP
 
 	if(sck_servidor == -1) 
 	{
@@ -54,14 +54,6 @@ int main()
 
 	struct sockaddr *cast_addr_serv = (struct sockaddr *) &addr_serv; // cast do endereço para struct genérica
 	int tam_addr_servidor = sizeof(addr_serv); // tamanho da struct
-
-	if(connect(sck_servidor, cast_addr_serv, tam_addr_servidor)==-1)
-	{
-		perror("O servidor final nao conectou!\n");	
-		exit(1);
-	}
-	else
-		perror("Conexao com o servidor final feita com sucesso!");
 
 //=====================================================
 // CRIAÇÃO DE SOCKET E PORTA PARA OUVIR O CLIENTE: UDP
@@ -96,7 +88,7 @@ int main()
 //====================================
 // PROXY ONLINE... ESPERA POR CLIENTE
 //====================================
-	printf("\n Esperando por mensagens: UDP...\n");
+	printf("\nEsperando por mensagens: UDP...\n");
 
 //===========================================================
 // RECEBE DO CLIENTE, ENVIA AO SERVIDOR E REENVIA A RESPOSTA
@@ -110,17 +102,17 @@ int main()
 			buffer[tam_msg] = '\0';
 			printf("\n=> Mensagem recebida do cliente: %s\n", buffer);
 			printf("Enviando para o servidor final...\n");
-			char *ip = inet_ntoa(addr_cliente.sin_addr);
-			printf("Cliente: %s\n\n", ip);
+			//char ip = inet_ntoa(addr_cliente.sin_addr);
+			//printf("Cliente: %s\n\n", ip);
 			//if(verifica_tabela() == OK) {
 
-			if(send(sck_servidor, buffer, strlen(buffer), 0)) // repassa o pedido ao servidor
+			if(sendto(sck_servidor, buffer, strlen(buffer), 0, cast_addr_serv, tam_addr_servidor))
 			{
 				if(!strcmp(buffer, "exit")) // se a mensagem for exit, fecha a conexão
 					break;
 
 				printf("Aguardando resposta do servidor...");
-				if((tam_msg = recv(sck_servidor, resposta, LEN, 0)) > 0) // se o servidor responder
+				if((tam_msg = recvfrom(sck_servidor, resposta, LEN, 0, cast_addr_serv, &tam_addr_servidor)) > 0)
 				{
 					printf("\n=> Mensagem recebida do servidor: %s\n", resposta);
 					printf("Enviando novamente para o cliente...\n");

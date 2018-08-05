@@ -1,4 +1,4 @@
-# Prototipo Cliente-Proxy-Servidor
+# Prototipo Cliente-Proxy-Servidor ~ UDP e TCP
 A configuração das portas estão em #define's dentro dos arquivos.<br />
 Ordem de execução:<br />
 1) servidor<br />
