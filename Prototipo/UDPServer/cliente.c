@@ -11,7 +11,7 @@ struct sockaddr_in remoto;
 int main()
 {
 
-	printf("================ CLIENTE =================\n\n");
+	printf("================ CLIENTE - UDP =================\n\n");
 
 	int sockfd = socket(AF_INET, SOCK_DGRAM, 0); //UDP
 	int len = sizeof(remoto);

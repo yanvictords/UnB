@@ -30,12 +30,12 @@ int main()
 	int tam_msg; // tamanho da mensagem recebida
 	char buffer[LEN], resposta[LEN]; // mensagem a ser enviada/recebida
 
-	printf("================ PROXY =================\n\n");
+	printf("================ PROXY - UDP =================\n\n");
 
 //===================================================================
-// CRIAÇÃO DE SOCKET E PORTA PARA SE CONECTAR AO SERVIDOR FINAL: TCP
+// CRIAÇÃO DE SOCKET E PORTA PARA SE CONECTAR AO SERVIDOR FINAL: UDP
 //===================================================================
-	sck_servidor = socket(AF_INET, SOCK_DGRAM, 0); //TCP
+	sck_servidor = socket(AF_INET, SOCK_DGRAM, 0); //UDP
 
 	if(sck_servidor == -1) 
 	{
