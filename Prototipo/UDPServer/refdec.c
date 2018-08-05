@@ -10,8 +10,8 @@
 //============
 //==DEFINE'S==
 //============
-#define _PORTA_CLIENTE 2001
-#define _PORTA_SERV 8081
+#define _PORTA_CLIENTE 2000
+#define _PORTA_SERV 8080
 #define _IP_SERVIDOR "127.0.0.1"
 #define LEN 4096
 

@@ -6,7 +6,7 @@
 
 struct sockaddr_in remoto;
 
-#define PORTA 2001
+#define PORTA 2000
 #define LEN 4096
 int main()
 {

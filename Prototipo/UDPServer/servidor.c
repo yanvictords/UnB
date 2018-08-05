@@ -5,7 +5,7 @@
 #include "refdec.h"
 
 struct sockaddr_in servidor;
-#define PORTA 8081
+#define PORTA 8080
 #define LEN 4096
 int main()
 {
