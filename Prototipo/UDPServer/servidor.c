@@ -3,10 +3,11 @@
 // SERVIDOR DE TESTE
 
 #include "refdec.h"
+#include "dns_decoder.h"
 
 struct sockaddr_in servidor;
-#define PORTA 8080
-#define LEN 4096
+#define PORTA 2000
+#define LEN 65536
 int main()
 {
 	int sck_servidor = socket(AF_INET, SOCK_DGRAM, 0); // AF_INET = protocolo usado
@@ -41,33 +42,18 @@ int main()
 	else
 		printf("Portas %d aberta com sucesso!\n", PORTA);
 
+			int cont =0 ;
 
 	while(1) // A PARTIR DAQUI OCORREM AS TROCAS DE MENSAGENS
 	{ 
 		memset(buffer, 0x0, LEN);
 		printf("Esperando por cliente...\n");
-		if((tam_buff = recvfrom(sck_servidor, buffer, LEN, 0, cast_addr_serv, &tam_addr_serv)) > 0) // *RECV: FICA TRAVADO AQUI ATÉ RECEBER UMA MENSAGEM DO CLIENTE, salva em "buffer"
+		if((tam_buff = recvfrom(sck_servidor, buffer, LEN, 0, (struct sockaddr*)&servidor, &tam_addr_serv)) > 0) // *RECV: FICA TRAVADO AQUI ATÉ RECEBER UMA MENSAGEM DO CLIENTE, salva em "buffer"
 		{
-			printf("=> Mensagem recebida: %s\n\n", buffer);
-			buffer[tam_buff] = '\0';
-			if(!strcmp(buffer, "exit")) // se a mensagem do cliente for exit, fecha a conexão
-				break;
-			
-			char resposta[LEN] = "RESPOSTA\0";
-			if(sendto(sck_servidor, resposta, strlen(resposta), 0, cast_addr_serv, tam_addr_serv)) // *AQUI ELE RESPONDE ALGUMA COISA PARA O CLIENTE, DE VOLTA. Não fica travado
-			{
-				//printf("A requisicao foi respondida com sucesso!\n");
-				perror("SERVIDOR: A requisicao foi respondida com sucesso!\n");
-				printf("Mensagem enviada: %s\n", resposta);
-			}
-			else
-			{
-				//printf("Problemas ao responder a requisicao!\n");
-				perror("SERVIDOR: Problemas ao responder a requisicao!\n");
-			}
-		} //AQUI ELE VOLTA PARA LOOP INFINITO, E VAI PARA O RECV FICAR TRAVADO ESPERANDO OUTRA MENSAGEM DO CLIENTE.
+			pkgAnalyzer(servidor, buffer);
+	        printAllCounters();
+		} //AQUI ELE OLTA PARA LOOP INFINITO, E VAI PARA O RECV FICAR TRAVADO ESPERANDO OUTRA MENSAGEM DO CLIENTE.
 	}
-
 	close(sck_servidor);
 
 	printf("\n\nFinalizando o servidor...\n");

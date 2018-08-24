@@ -7,17 +7,58 @@
 struct sockaddr_in remoto;
 
 #define PORTA 53
-#define _IP "208.67.222.222"
+#define _IP "208.67.220.220"
 #define LEN 1000000
+#define IPARRAYLEN 20
+#define QUERYMAXLEN 4096
+typedef unsigned char char_type;
+char_type* parse_result(char_type* result, int query_len, char_type* ip) {
+    /*int offset = -1;
+
+    //offset = query_len + 32;
+    int count = 0;
+    while(count < 3) {
+        offset++;
+        if(result[offset] == 0x00C0) {
+            count++;
+        }
+    }
+
+    offset += 32;*/
+
+    int offset = -1;
+    int found = 0;
+    while(found == 0) {
+        offset++;
+        if(result[offset] == 0x00C0) {
+	printf("ok\n");
+            if(result[offset + 3] == 0x0001 && result[offset + 2] == 0x0000) {
+                offset = offset + 12;
+                found = 1;
+            }
+        }
+    }
+
+    sprintf(ip, "%d.%d.%d.%d\n", 
+    result[offset], result[offset + 1], 
+    result[offset + 2], result[offset + 3]);
+
+    return ip;
+}
+
+
 int main()
 {
 
+	FILE *arq;
+	arq=fopen("entrada", "r+");
 	printf("================ CLIENTE - UDP =================\n\n");
 
 	int sockfd = socket(AF_INET, SOCK_DGRAM, 0); //UDP
 	int len = sizeof(remoto);
 	int slen;
-	char buffer[LEN];
+	char_type* buffer;
+	buffer = (char_type*)malloc((QUERYMAXLEN) * sizeof(char_type));
 	if(sockfd == -1)
 	{
 		perror("O socket nao foi criado com sucesso!\n");
@@ -35,16 +76,15 @@ int main()
 
 	struct sockaddr *cast_remoto = (struct sockaddr *) &remoto;
 	int tam_addr_remoto = sizeof(remoto);
-
+    char_type* ip;
 	while(1)
 	{
-		printf("\nPeca algo ao servidor: ");
-		fgets(buffer, sizeof(buffer), stdin);
+		printf("Lendo arquivo\n");
+		fread(buffer, (QUERYMAXLEN) * sizeof(char_type), 1, arq);
+		printf("teste: \n%s", buffer);
+
 		if(sendto(sockfd, buffer, strlen(buffer), 0, cast_remoto, tam_addr_remoto)) // faz um pedido ao proxy
 		{
-			if(!strcmp(buffer, "exit"))
-				break;
-
 			printf("\nAguardando resposta do servidor...\n");
 		}
 		else
@@ -52,11 +92,11 @@ int main()
 		if((slen = recvfrom(sockfd, buffer, LEN, 0, cast_remoto, &tam_addr_remoto)) > 0) // Na primeira vez, espera a mensagem de bem-vindo do proxy; Recebe pedidos do proxy
 		{
 			buffer[slen] = '\0';
-			int i;
-			printf("\n");
-			for(i=0; i<slen; i++)
-				printf("%c", buffer[i]);
+		    //ip = (char_type*)malloc(IPARRAYLEN * sizeof(char_type));
+			printf("Resposta do servidor: \n%s\n", buffer);
+			
 		}
+		break;
 	}
 
 
