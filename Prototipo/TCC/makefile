@@ -1,5 +1,5 @@
 # This makefile runs all necessary files to filter a package traffic in the local area
-# To run, just shell the follow commands:
+# To run, enter in a shell the follow commands::
 # make
 # ./OUTFILE_NAME_HERE
 
