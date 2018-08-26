@@ -1,13 +1,23 @@
 #include "feedback.h"
 
-void printQueryTypeAndProtocol(char * module, int operation, int protocol)
+void printBegin()
 {
-	if (operation == 0)
-		printf("[%s]: The package is a QUERY/REQUEST :: %s protocol.\n", module, getProtocolName(protocol));
-	else if (operation == 1)
-		printf("[%s]: The package is a RESPONSE :: %s protocol.\n", module, getProtocolName(protocol));
+	printf("\n==============BEGIN - LOG==============\n");
+}
+
+void printEnd()
+{
+	printf("\n===============END - LOG===============\n");
+}
+
+void printQueryType(char * module, int operation)
+{
+	if (operation == 1)
+		printf("[%s]: The package is a QUERY/REQUEST\n", module);
+	else if (operation == (-1))
+		printf("[%s]: The package is a RESPONSE\n", module);
 	else
-		printf("[%s]: The package type is UNKNOWN :: %s protocol.\n", module, getProtocolName(protocol));
+		printf("[%s]: The package type is UNKNOWN\n", module);
 }
 
 void printUnknownProtocol(char * module)
@@ -22,12 +32,31 @@ void printOkStatus(char * module, int status)
 
 void printErrorStatus(char * module, int status, char * exception)
 {
-	printf("[%s]: Status %d. Error: A problem was detected!\nThrown Exception: %s\n", module, status, exception); 	
+	printf("[%s]: Status %d. [ERROR] A problem was detected!\n=> Thrown Exception: %s\n", module, status, exception); 	
 }
 
 void printAnotherStatus(char * module, int status, char * event)
 {
-	printf("[%s]: Status %d. A different event occurred.\nEvent Description: %s\n", module, status, event);
+	printf("[%s]: Status %d. Event Description: %s\n", module, status, event);
+}
+
+void printGetInBlackListStatus(char * module, int status, struct sockaddr_in addr)
+{
+	char node_addr[_LEN];
+	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
+	printf("[%s]: Status %d. [BLACKLIST] The host %s was found in the blacklist.\n[ACTION] All packets are being BLOCKED!\n", module, status, node_addr);
+}
+
+void printPutInBlackListStatus(char * module, int status, struct sockaddr_in addr)
+{
+	char node_addr[_LEN];
+	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
+	printf("[%s]: Status %d. [BLACKLIST] The host %s was listed in the blacklist.\n[ACTION] All packets will be BLOCKED from now on!\n", module, status, node_addr);
+}
+
+void printFileNotFound(char * module, char * file)
+{
+	printf("[%s]: [ERROR] File %s was not found!\n", module, file);
 }
 
 void printProtocolName(char * module, int protocol)
@@ -41,13 +70,14 @@ void printAlert(char * module, struct sockaddr_in addr, int protocol, int counte
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 
 	printf("\n************************ALERT****************************\n");
-	printf("%s: The non-local server is being a reflector candidate!\n", module);
-	printf("Host: %s:%d :: %s protocol package", node_addr, htons(addr.sin_port), getProtocolName(protocol));
+	printf("[%s]: The non-local server is being a reflector candidate!\n", module);
+	printf("Host Ip Address: %s:%d ~ %s protocol package\n", node_addr, htons(addr.sin_port), getProtocolName(protocol));
 	printf("Counter: %d\n", counter);
 	printf("************************ALERT****************************\n\n");
 }
 
-char * getProtocolName(int protocol){
+char * getProtocolName(int protocol)
+{
 	switch (protocol)
 	{
 		case 1: //dns

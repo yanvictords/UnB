@@ -6,7 +6,7 @@
 
 struct sockaddr_in servidor;
 struct sockaddr_in cli_proxy;
-#define PORTA 2001
+#define PORTA 80
 #define LEN 4096
 int main()
 {

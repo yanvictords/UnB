@@ -1,21 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
-#include <inttypes.h>
-#include <arpa/inet.h>
-
+#include "packages.h"
 #include "identifier.h"
 #include "feedback.h"
 
 //===== PACKAGES
-#define _QUERY 0
-#define _RESPONSE 1
-#define _UNKNOWN_QUERY_TYPE -1
+#define _QUERY 1
+#define _RESPONSE -1
+#define _UNKNOWN_QUERY_TYPE 0
 
 #define _1BIT 1
 #define _4BITS 4
@@ -44,7 +34,7 @@ struct DNS_HEADER
 };
 
 int packageDecoder(int protocol,  char * buffer);
-int getDnsOperation(char * buffer);
-int getNtpOperation(char * buffer);
-int getSnmpOperation(char * buffer);
-int getSsdpOperation(char * buffer);
+int getDnsQueryType(char * buffer);
+int getNtpQueryType(char * buffer);
+int getSnmpQueryType(char * buffer);
+int getSsdpQueryType(char * buffer);

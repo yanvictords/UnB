@@ -2,8 +2,7 @@
 
 int packageRegistration(struct in_addr sin_addr, int operation, int protocol)
 {
-	int counter = updateCountersList(sin_addr, operation, protocol);
-	return counter;
+	return updateCountersList(sin_addr, operation, protocol);
 }
 
 int updateCountersList(struct in_addr sin_addr, int operation, int protocol)
@@ -25,22 +24,27 @@ int updateCountersList(struct in_addr sin_addr, int operation, int protocol)
 		{
 			listAux->count += operation;
 			
-			// if the node isn't the root node, moves it off the list
-			if (predecessor != NULL)
-				predecessor->next = listAux->next;
-
 			// Checks whether the host should be dropped from the list (black list or no more pending requests)
 			if (mustKeepHostOnTheList(listAux))
 			{
-				// making the swap (putting the node at root of the list)
-				listAux->next = root;
-				root = listAux;
+				// if the node isn't the root node, moves it off the list
+				if (predecessor != NULL)
+				{				
+					// making the swap (putting the node at root of the list)
+					predecessor->next = listAux->next;
+					listAux->next = root;
+					root = listAux;
+				}
 			}
 			else
 			{
-				if (predecessor == NULL) // if the node which will be dropped is the root
-					root = listAux->next;
+				if (predecessor != NULL)
+					predecessor->next = listAux->next;
+				else // if the node which will be dropped is the root
+					setProtocolRoot(protocol, NULL);
+
 				free(listAux);
+				return _DROPPED_NODE;
 			}
 
 			setProtocolRoot(protocol, root);
@@ -53,6 +57,9 @@ int updateCountersList(struct in_addr sin_addr, int operation, int protocol)
 	// If IP isn't registered yet. Updates the root to be the newer counter node
 	root = create_node(root, sAddr);
 	root->count += operation;
+	if (root->count < 0)
+		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "[WARNING] Anomalous operation. A negative counter was detected.");
+
 	setProtocolRoot(protocol, root);
 
 	return root->count;
@@ -65,19 +72,19 @@ bool mustKeepHostOnTheList(struct COUNT_ADDR * listAux)
 
 	if (listAux->count == 0) // if all requests were responded
 	{
-		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "Matching: all operations with this IP address were resolved.");
-		return false;
+		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "Matching. All operations with this IP address were resolved.");
+		return true;
 	}
 
-	if (listAux->count < _LOW_LIMIT) // if the counter demonstrate a characteristic of DDoS attack by reflection
+	if (listAux->count < _LOW_LIMIT_STOP) // if the counter demonstrate a characteristic of DDoS attack by reflection
 	{
-		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "[WARNING] Anomalous operation: the counter negative value is less than allowed.");
+		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "[WARNING] Anomalous operation. The counter negative value is less than allowed.");
 		return false;
 	}
 
 	if (listAux->count < 0) // stay alert
 	{
-		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "[WARNING] Anomalous operation: a negative counter was detected.");
+		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "[WARNING] Anomalous operation. A negative counter was detected.");
 		return true;
 	}
 }

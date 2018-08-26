@@ -6,44 +6,51 @@ int packageDecoder(int protocol,  char * buffer)
 	switch (protocol)
 	{
 		case _DNS:
-			operation = getDnsOperation(buffer);
+			operation = getDnsQueryType(buffer);
 			break;
 		case _NTP:
-			operation = getNtpOperation(buffer);
+			operation = getNtpQueryType(buffer);
 			break;
 		case _SNMP:
-			operation = getSnmpOperation(buffer);
+			operation = getSnmpQueryType(buffer);
 			break;
 		case _SSDP:
-			operation =	getSsdpOperation(buffer);
+			operation =	getSsdpQueryType(buffer);
 			break;
 		default:
 			operation = 	_UNKNOWN_QUERY_TYPE;
 	}
 
-	printQueryTypeAndProtocol(_MODULE_DECODER, operation, protocol);
+	printQueryType(_MODULE_DECODER, operation);
 	return operation;
 }
 
-int getDnsOperation(char * buffer)
+int getDnsQueryType(char * buffer)
 {
 	struct DNS_HEADER *dns;
     dns = (struct DNS_HEADER*) buffer;
-	return (int) dns->qr;
+
+	if((int) dns->qr == 1)
+		return _RESPONSE;
+	else if((int) dns->qr == 0)
+		return _QUERY;
+
+	return _UNKNOWN_QUERY_TYPE;
 }
 
-int getNtpOperation(char * buffer)
+int getNtpQueryType(char * buffer)
 {
 	return _UNKNOWN_QUERY_TYPE;
 }
 
-int getSnmpOperation(char * buffer)
+int getSnmpQueryType(char * buffer)
 {
 	return _UNKNOWN_QUERY_TYPE;
 }
 
-int getSsdpOperation(char * buffer)
+int getSsdpQueryType(char * buffer)
 {
 	return _UNKNOWN_QUERY_TYPE;
 }
+
 

@@ -7,6 +7,7 @@
 #include <netdb.h>
 #include <inttypes.h>
 #include <stdbool.h>
+#include <arpa/inet.h>
 
 #define _1BIT 1
 #define _4BITS 4

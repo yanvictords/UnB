@@ -1,24 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
-#include <inttypes.h>
-#include <arpa/inet.h>
-
+#include "packages.h"
 #include "identifier.h"
 
 //===== STATUS
 #define _ANOMALOUS_OP -2
+#define _DROPPED_NODE 0
 
 //===== MODULE
 #define _MODULE_RECORD "RECORD"
 
 //===== BORDERS
-#define _LOW_LIMIT -5
+#define _LOW_LIMIT_STOP -10000
 
 #define _LEN 65536
 
