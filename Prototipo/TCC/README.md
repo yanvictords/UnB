@@ -4,10 +4,9 @@ A ferramenta é capaz por detectar a presença de possíveis refletores em ataqu
 
 O programa "dns_refletor.c" atua como refletor, executando uma QUERY para um servidor DNS via terminal. O pacote é repassado ao analisador da ferramenta implementada, que logo detecta a presença do refletor. Diversas outras funcionalidades podem ser vistas nos arquivos .h's. <br />
 
-Para executar cada programa:<br />
-chmod 755 make.sh<br />
-./make.sh<br />
-./ddosDetector<br />
+Para executar o servidor de filtragem e o detector:<br />
+./make<br />
+./RDetector (pode mudar o nome no arquivo makefile)<br />
 ~> Digite um IP de qualquer servidor DNS válido para executar a query (ex.: 8.8.8.8, 8.8.4.4, etc.)<br />
  <br />
 
