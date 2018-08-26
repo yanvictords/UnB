@@ -1,4 +1,4 @@
-# TRABALHO FINAL DE GRADUAÇÃO
+# TG2
 Todos os códigos, com exceção do arquivo "dns_refletor.c", foram feitos por mim: Yan Victor dos Santos. <br />
 A ferramenta é capaz por detectar a presença de possíveis refletores em ataques DDoS volumétricos. <br />
 
