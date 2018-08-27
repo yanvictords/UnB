@@ -1,4 +1,5 @@
 #include "packages.h"
+#include <time.h>
 
 #define _LEN 65536
 
@@ -15,3 +16,4 @@ void printFileNotFound(char * module, char * file);
 void printProtocolName(char * module, int protocol);
 void printAlert(char * module, struct sockaddr_in addr, int protocol, int counter);
 char * getProtocolName(int protocol);
+void printTime();

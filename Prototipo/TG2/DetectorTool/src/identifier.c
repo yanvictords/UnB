@@ -19,6 +19,8 @@ int identifyByPort(int port)
 			return _SNMP;
 		case 1900:
 			return _SSDP;
+//		default:  // just for test
+//			return _DNS;
 	}
 	return _UNKNOWN_PROTOCOL;
 }

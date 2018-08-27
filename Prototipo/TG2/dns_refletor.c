@@ -3,7 +3,17 @@
 //Dated : 29/4/2009
  
 //Header Files
-#include "analyzer.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <inttypes.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 
 typedef uint8_t u1;
 typedef uint16_t u2;
@@ -133,7 +143,7 @@ void ngethostbyname(unsigned char *host , int query_type)
     dest.sin_addr.s_addr = inet_addr(dnss); //dns servers
  
     cliente.sin_family = AF_INET;
-    cliente.sin_port = htons(2000);
+    cliente.sin_port = htons(80);
 //	char dnss[100];
     cliente.sin_addr.s_addr = inet_addr("127.0.0.1"); //dns servers
 
@@ -186,8 +196,6 @@ void ngethostbyname(unsigned char *host , int query_type)
     {
         perror("recvfrom failed");
     }
-	
-	package_analyzer(dest, buf, false);
 
  	printf("\nRecibo: %s\n", (char*) buf);
 	

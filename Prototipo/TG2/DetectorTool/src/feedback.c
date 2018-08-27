@@ -2,12 +2,13 @@
 
 void printBegin()
 {
-	printf("\n==============BEGIN - LOG==============\n");
+	printf("\n\n==============BEGIN - LOG==============\n");
 }
 
 void printEnd()
 {
-	printf("\n===============END - LOG===============\n");
+	printTime();
+	printf("\n===============END - LOG===============\n\n");
 }
 
 void printQueryType(char * module, int operation)
@@ -90,4 +91,12 @@ char * getProtocolName(int protocol)
 			return "SSDP";
 	}
 	return "UNKNOWN";
+}
+
+void printTime()
+{
+	time_t mytime = time(NULL);
+    char * time_str = ctime(&mytime);
+    time_str[strlen(time_str)-1] = '\0';
+    printf("[%s]", time_str);
 }

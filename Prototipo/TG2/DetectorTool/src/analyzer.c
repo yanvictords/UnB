@@ -1,14 +1,16 @@
 #include "../include/analyzer.h"
 
-int package_analyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
+int packageAnalyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
 {
 	printBegin();
-	
-	if(getAddrInBlackList(addr))
+	if(!localNetHost)
 	{
-		printGetInBlackListStatus(_MODULE_ANALYZER, _REJECT_ADDR, addr);	
-		printEnd();
-		return _REJECT_ADDR;	
+		if(getAddrInBlackList(addr))
+		{
+			printGetInBlackListStatus(_MODULE_ANALYZER, _REJECT_ADDR, addr);	
+			printEnd();
+			return _REJECT_ADDR;	
+		}
 	}
 	int protocol =		protocolIdentifier(addr.sin_port); // gets the protocol
 	
@@ -88,7 +90,7 @@ bool getAddrInBlackList(struct sockaddr_in addr)
 void putAddrInBlackList(struct sockaddr_in addr)
 {
 	FILE *file;
-	file = fopen("blacklist.txt", "a+");
+	file = fopen("../blacklist.txt", "a+");
 	char node_addr[_LEN];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 	

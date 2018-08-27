@@ -22,7 +22,7 @@
 //===== FILE
 #define _BLACK_LIST_FILE "blacklist.txt"
 
-int package_analyzer(struct sockaddr_in addr, char * buffer, bool localNetHost);
+int packageAnalyzer(struct sockaddr_in addr, char * buffer, bool localNetHost);
 int analyzePackageCounter(int counter, struct sockaddr_in addr, int protocol);
 bool getAddrInBlackList(struct sockaddr_in addr);
 void putAddrInBlackList(struct sockaddr_in addr);
