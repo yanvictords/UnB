@@ -116,6 +116,7 @@ void localPackageListener(char * buffer)
 
 		char * bufferContent = getPackageContent(buffer);
 		struct sockaddr_in hostDest = getHeaderDestAddr(buffer);
+		printHost(&hostDest);
 
 		int status = packageAnalyzer(hostDest, bufferContent, _IS_LOCAL);
 		nonLocalPackageSender(bufferContent, hostDest);
@@ -204,7 +205,7 @@ char * putHeaderDestAddr(char * buffer, struct sockaddr_in * destAddr)
 struct sockaddr_in getHeaderDestAddr(char * buffer)
 {
 	struct sockaddr_in * destAddr = (struct sockaddr_in *) buffer;
-	return setAddrInfors(destAddr->sin_addr.s_addr, htons(destAddr->sin_port));
+	return *destAddr;
 }
 
 void printHost(struct sockaddr_in * host)
@@ -212,6 +213,6 @@ void printHost(struct sockaddr_in * host)
 	char node_addr[_LEN];
 	inet_ntop(AF_INET, &(host->sin_addr), node_addr, INET_ADDRSTRLEN);
 
-	printf("Host: [%s:%s]\n", node_addr, htons(host->sin_port));
+	printf("\nPrint Host: [%s:%d]\n", node_addr, htons(host->sin_port));
 }
 

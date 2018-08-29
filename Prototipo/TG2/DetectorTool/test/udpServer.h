@@ -15,7 +15,7 @@
 #define _LOCAL_PORT 3000
 
 #define _MAIN_ADDR "127.0.0.1"
-#define _MAIN_SERV_PORT 80
+#define _MAIN_SERV_PORT 2000
 #define _REAL_ADDR "8.8.8.8"
 #define _REAL_SERV_PORT 53
 

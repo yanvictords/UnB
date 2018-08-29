@@ -20,7 +20,7 @@
 #define _MODULE_ANALYZER "ANALYZER"
 
 //===== FILE
-#define _BLACK_LIST_FILE "blacklist.txt"
+#define _BLACK_LIST_FILE "../blacklist.txt"
 
 int packageAnalyzer(struct sockaddr_in addr, char * buffer, bool localNetHost);
 int analyzePackageCounter(int counter, struct sockaddr_in addr, int protocol);
