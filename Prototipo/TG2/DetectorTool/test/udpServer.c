@@ -31,11 +31,11 @@ void checkSocket(int sck_server)
 {
 	if(sck_server == -1)
 	{
-		printf("Houve problema ao criar socket\n");
+		printf("There was a problem creating the socket\n");
 		exit(1);
 	}
 	else
-		printf("Socket criado com sucesso!\n");
+		printf("Socket was created successfully!\n");
 }
 
 void bindPort(struct sockaddr_in addr, int port)

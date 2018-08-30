@@ -11,15 +11,19 @@
 
 #include "dnsPackage.h"
 
+#define _DNS_PORT 53
+
 #define _VICTIM_PORT 80
 #define _VICTIM_ADDRESS "127.0.0.1"
 
 #define _LEN 65500
 
+struct sockaddr_in attacker;
 struct sockaddr_in victim;
 
 void startAttack();
 void checkSocket();
 void toAttack();
+void bindPort();
 
 int sck;
