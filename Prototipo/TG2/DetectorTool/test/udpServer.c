@@ -75,7 +75,7 @@ void * toListen(void * args)
 
 void * toSend(void * args)
 {
-	char buffer[_LEN + _LEN];
+	char buffer[_LEN];
 	char *bufferFinal;
 
 	// ---- main server
