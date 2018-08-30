@@ -57,8 +57,8 @@ int updateCountersList(struct in_addr sin_addr, int operation, int protocol)
 	// If IP isn't registered yet. Updates the root to be the newer counter node
 	root = create_node(root, sAddr);
 	root->count += operation;
-	if (root->count < 0)
-		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "[WARNING] Anomalous operation. A negative counter was detected.");
+
+	mustKeepHostOnTheList(root);
 
 	setProtocolRoot(protocol, root);
 
@@ -68,11 +68,14 @@ int updateCountersList(struct in_addr sin_addr, int operation, int protocol)
 bool mustKeepHostOnTheList(struct COUNT_ADDR * listAux)
 {
 	if (listAux->count > 0) // if there is a pendant request
+	{	
+		printAnotherStatus(_MODULE_RECORD, _NORMAL_OP, "Positive counter. Waiting for matching with the destiny IP address.");
 		return true;
+	}
 
 	if (listAux->count == 0) // if all requests were responded
 	{
-		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "Matching. All operations with this IP address were resolved.");
+		printAnotherStatus(_MODULE_RECORD, _NORMAL_OP, "Matching. All operations with this IP address were resolved.");
 		return false;
 	}
 

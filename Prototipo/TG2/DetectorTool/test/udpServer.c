@@ -89,6 +89,10 @@ void * toSend(void * args)
 	int sizeAddr = sizeof(mainServerSend);
 	int * sizeRealAddr;
 
+		unsigned char host[_LEN];
+		printf("DIGITE O HOST: ");
+		scanf("%s", host);
+
 	while (true)
 	{
 		// ---- non-local server
@@ -97,38 +101,15 @@ void * toSend(void * args)
 		realServerAddress->sin_port = htons(_REAL_SERV_PORT);
 		realServerAddress->sin_addr.s_addr = inet_addr(_REAL_ADDR);
 		memset(realServerAddress->sin_zero, 0x0, 8);	
-		// sizeRealAddr = (int *) buffer;
-		//int sizeReal = sizeof(realServerAddress);
-		//*sizeRealAddr = sizeReal;
 
-		unsigned char host[_LEN];
-		printf("DIGITE O HOST: ");
-		scanf("%s", host);
 		
 		mountDnsPackage((unsigned char) 0, &buffer[_HEADER_ADDR_SZ], host);
-
-		printf("\nQUERYING: \n");
-		struct sockaddr_in *addrData = (struct sockaddr_in *) buffer;
-
-		char node_addr[_LEN];
-		inet_ntop(AF_INET, &(addrData->sin_addr), node_addr, INET_ADDRSTRLEN);
-		printf("IP: %s, port: %d\n",  node_addr, htons(addrData->sin_port));
-
-		struct DNS_H *dns_aux;
-	    dns_aux = (struct DNS_H *)&buffer[_HEADER_ADDR_SZ];
-		printf("\nQUERY TYPE: %d\n", (int) dns_aux->qr);		
 
 		int buffer_size = _HEADER_ADDR_SZ + sizeof(struct DNS_H);
 
 		if (sendto(sck_send, (char*) buffer, buffer_size, 0, (struct sockaddr*)&mainServerSend, sizeAddr) < 0)
 	        printf("Sendto local host failed!\n");
 		else
-		{
 			printf("The package was forwarded to local host successfully!\n");
-			if (recvfrom(sck_send,(char*)buffer, _LEN, 0, (struct sockaddr*)&mainServerSend, &sizeAddr) <= 0)
-    		    printf("Recvfrom main server failed!\n");
-			else
-				printf("The response message was received successfully!\n");
-		}
 	}
 }

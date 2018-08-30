@@ -2,7 +2,8 @@
 #include "identifier.h"
 
 //===== STATUS
-#define _ANOMALOUS_OP -2
+#define _ANOMALOUS_OP -1
+#define _NORMAL_OP 1
 #define _DROPPED_NODE 0
 
 //===== MODULE

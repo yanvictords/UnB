@@ -1,7 +1,6 @@
 #include <pthread.h>
 #include "packages.h"
 #include "analyzer.h"
-#include "../test/dnsPackage.h"
 #include <time.h>
 
 #define _BUFFER_SIZE 65536
