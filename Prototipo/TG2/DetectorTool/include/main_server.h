@@ -1,7 +1,7 @@
 #include <pthread.h>
+#include <time.h>
 #include "packages.h"
 #include "analyzer.h"
-#include <time.h>
 
 #define _BUFFER_SIZE 65536
 #define _IS_LOCAL true

@@ -96,10 +96,10 @@ void * toSend(void * args)
 		memset(realServerAddress->sin_zero, 0x0, 8);	
 
 		unsigned char host[_LEN];
-		printf("\n=> DIGITE O HOST: ");
+		printf("\n=> TYPE THE HOST: ");
 		scanf("%s", host);
 		
-		mountDnsPackage((unsigned char) 0, &buffer[_HEADER_ADDR_SZ], host);
+		mountDnsPackage((unsigned char) _QUERY, &buffer[_HEADER_ADDR_SZ], host);
 
 		int buffer_size = _HEADER_ADDR_SZ + sizeof(struct DNS_H);
 

@@ -25,7 +25,10 @@ typedef uint64_t u8;
 #define T_SOA 6 /* start of authority zone */
 #define T_PTR 12 /* domain name pointer */
 #define T_MX 15 //Mail server
- 
+
+#define _QUERY 0 
+#define _RESPONSE 1
+
 struct DNS_H
 {
     unsigned short id; 
