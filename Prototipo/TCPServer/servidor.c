@@ -6,7 +6,7 @@
 
 struct sockaddr_in servidor;
 struct sockaddr_in cli_proxy;
-#define PORTA 80
+#define PORTA 2000
 #define LEN 4096
 int main()
 {
@@ -74,7 +74,8 @@ int main()
 				else
 					printf("A conexao foi efetuada com sucesso!\n");	
 			}
-			else
+			printf("PEDIDO: %s\n", buffer);
+			/*else
 			{
 				char resposta[LEN];
 				printf("Digite algo para o cliente: ");
@@ -93,7 +94,7 @@ int main()
 					//printf("Problemas ao responder a requisicao!\n");
 					perror("SERVIDOR: Problemas ao responder a requisicao!\n");
 				}
-			}
+			}*/
 		} //AQUI ELE VOLTA PARA LOOP INFINITO, E VAI PARA O RECV FICAR TRAVADO ESPERANDO OUTRA MENSAGEM DO CLIENTE.
 	}
 

@@ -4,10 +4,12 @@
 
 #include "refdec.h"
 
-struct addrinfo hints, *results;
+struct sockaddr_in hints;
 
-#define PORTA "80"
+#define PORTA 7000
 #define LEN 4096
+#define _IP_SERVIDOR "127.0.0.1"
+
 int main()
 {
 	FILE *arq;
@@ -18,22 +20,14 @@ int main()
 	int sockfd;
 	int slen;
 	char buffer[LEN];
-	char domain[100];
 
 	memset(&hints, 0, sizeof(hints));
-	hints.ai_family = AF_INET;
-	hints.ai_socktype = SOCK_STREAM;
+	hints.sin_family = AF_INET;
+	hints.sin_port = htons(PORTA);
+	hints.sin_addr.s_addr = inet_addr(_IP_SERVIDOR);
 	
-	printf("Digite o endereco: \n");
-	scanf("%s", domain);
 	
-	if(getaddrinfo(domain, PORTA, &hints, &results) != 0)
-	{
-		printf("Deu ruim na hora de pegar o IP do dominio\n");
-		exit(1);
-	}
-
-	sockfd = socket(results->ai_family, results->ai_socktype, results->ai_protocol);
+	sockfd = socket(AF_INET, SOCK_STREAM, 0); //TCP
 
 	if(sockfd == -1)
 	{
@@ -45,7 +39,7 @@ int main()
 		printf("O socket foi criado com sucesso!\n");
 	}
 
-	if(connect(sockfd, results->ai_addr, results->ai_addrlen)==-1)
+	if(connect(sockfd, (struct sockaddr *) &hints, sizeof(hints))==-1)
 	{
 		perror("O servidor final nao conectou!\n");	
 		exit(1);
@@ -56,9 +50,8 @@ int main()
 	while(1)
 	{
 		memset(buffer, 0x0, LEN);
-		printf("Lendo arquivo\n");
-		fread(buffer, sizeof(buffer), 1, arq);
-
+		printf("Ouvindo... ");	
+		/*scanf("%s", buffer);
 		if(send(sockfd, buffer, sizeof(buffer), 0)) // faz um pedido ao proxy
 		{
 			if(!strcmp(buffer, "exit"))
@@ -67,13 +60,13 @@ int main()
 			printf("Aguardando resposta do servidor...\n");
 		}
 		else
-			printf("O servidor nao recebeu a mensagem...\n");
+			printf("O servidor nao recebeu a mensagem...\n");*/
 		if((slen = recv(sockfd, buffer, LEN, 0)) > 0) // Na primeira vez, espera a mensagem de bem-vindo do proxy; Recebe pedidos do proxy
 		{
 			buffer[slen] = '\0';
 			printf("\n=> Mensagem Recebida do proxy: %s\n", buffer);
 		}
-		break;
+		//break;
 	}
 	
 	close(sockfd);

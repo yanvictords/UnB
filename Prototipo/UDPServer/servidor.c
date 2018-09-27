@@ -50,8 +50,10 @@ int main()
 		printf("Esperando por cliente...\n");
 		if((tam_buff = recvfrom(sck_servidor, buffer, LEN, 0, (struct sockaddr*)&servidor, &tam_addr_serv)) > 0) // *RECV: FICA TRAVADO AQUI ATÉ RECEBER UMA MENSAGEM DO CLIENTE, salva em "buffer"
 		{
-			pkgAnalyzer(servidor, buffer);
-	        printAllCounters();
+		//	pkgAnalyzer(servidor, buffer);
+	        //printAllCounters();
+			printf("Chegou\n");
+			sendto(sck_servidor, "DEU CERTO", sizeof("DEU CERTO"), 0, (struct sockaddr*)&servidor, tam_addr_serv);
 		} //AQUI ELE OLTA PARA LOOP INFINITO, E VAI PARA O RECV FICAR TRAVADO ESPERANDO OUTRA MENSAGEM DO CLIENTE.
 	}
 	close(sck_servidor);
