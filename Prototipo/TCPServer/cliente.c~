@@ -7,11 +7,8 @@
 struct sockaddr_in hints;
 
 #define PORTA 7000
-
 #define IP_SERVIDOR "10.42.0.181"
 #define LEN 4096
-#define _IP_SERVIDOR "127.0.0.1"
-
 int main()
 {
 	printf("================ CLIENTE - TCP =================\n\n");
@@ -23,13 +20,10 @@ int main()
 	memset(&hints, 0, sizeof(hints));
 	hints.sin_family = AF_INET;
 	hints.sin_port = htons(PORTA);
-	hints.sin_addr.s_addr = inet_addr(_IP_SERVIDOR);
-	
-	
-	sockfd = socket(AF_INET, SOCK_STREAM, 0); //TCP
-	hints.sin_addr.s_addr = inet_addr(_IP_SERVIDOR);
+	hints.sin_addr.s_addr = inet_addr(IP_SERVIDOR);
 
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
 	if(sockfd == -1)
 	{
 		perror("O socket nao foi criado com sucesso!\n");
@@ -51,28 +45,14 @@ int main()
 	while(1)
 	{
 		memset(buffer, 0x0, LEN);
-		printf("Ouvindo... ");	
-		/*scanf("%s", buffer);
-		if(send(sockfd, buffer, sizeof(buffer), 0)) // faz um pedido ao proxy
-		{
-			if(!strcmp(buffer, "exit"))
-				break;
-
-			printf("Aguardando resposta do servidor...\n");
-		}
-		else
-			printf("O servidor nao recebeu a mensagem...\n");*/
 		printf("Motor server On...\n");
-
 
 		if((slen = recv(sockfd, buffer, LEN, 0)) > 0) // Na primeira vez, espera a mensagem de bem-vindo do proxy; Recebe pedidos do proxy
 		{
 			buffer[slen] = '\0';
 			printf("\n=> Comando Recebido: %s\n", buffer);
 		}
-
-		//break;
-
+		break;
 	}
 	
 	close(sockfd);
