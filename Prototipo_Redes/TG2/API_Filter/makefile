@@ -8,7 +8,7 @@ CFLAGS=-pthread
 OUTPUTFLAG=-o
 OUTFILE=api
 EXE=${OUTPUTFLAG} ${OUTFILE}
-MAIN_SERVER=src/Api/main.o
+MAIN_SERVER=src/Api/api_server.o
 DETECTOR_TOOL=src/DetectorTool/analyzer.o src/DetectorTool/identifier.o src/DetectorTool/decoder.o src/DetectorTool/record.o src/DetectorTool/ui.o
 
 detector: ${MAIN_SERVER} ${DETECTOR_TOOL} 
