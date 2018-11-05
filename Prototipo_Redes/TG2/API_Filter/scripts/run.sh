@@ -1,2 +1,2 @@
-make
-../api
+make --directory ../
+./../api
