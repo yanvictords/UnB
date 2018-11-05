@@ -114,9 +114,7 @@ void setProtocolRoot(int protocol, struct COUNT_ADDR * root)
 }
 
 struct COUNT_ADDR * getProtocolRoot(int protocol)
-{
-	if(p_dns == NULL)
-		printf("EH NUL PORRA\n");
+{	
 	switch (protocol)
 	{
 		case _DNS:
@@ -142,18 +140,24 @@ struct COUNT_ADDR * create_node(struct COUNT_ADDR * next, unsigned long addr)
 void printAllCounters(int protocol)
 {
 	char aux[4096];
-	int size=0;
+	bool nullList = true;
 	struct COUNT_ADDR * listAux;
 	listAux = getProtocolRoot(protocol);
 
-	printf("\n***Listing All Counters***\n");
+	if(listAux!=NULL)
+	{
+		printf("\n@Listing All Counters: \n");
+		nullList = false;
+	}
 
 	while(listAux!=NULL){
 		inet_ntop(AF_INET, &(listAux->sin_addr), aux, 4096);
-		printf("IP: %s - Counter: %d\n", aux, listAux->count); 
+		printf("| IP: %s - Counter: %d\n", aux, listAux->count); 
 		listAux=listAux->next;
-		size++;
 	}
-	printf("*** Size: %d\n***End Counters***\n\n", size);
+
+	if(!nullList)
+		printf("\n");
+	
 }
 
