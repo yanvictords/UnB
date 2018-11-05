@@ -126,10 +126,11 @@ void nonLocalPackageSender(char * buffer, int buffer_size, struct sockaddr_in de
 
 void printBuffer(char * buffer, int size, bool localNetHost)
 {
+	printf("\n");
 	if (localNetHost)
-		printf("[%s]: A message was received from local server. Buffer size: %d", _API_SERVER, size);
+		printf("[%s]: A new message was received from local server. Buffer size: %d", _API_SERVER, size);
 	else
-		printf("[%s]: A message was received from non-LOCAL server. Buffer size: %d\n", _API_SERVER, size);
+		printf("[%s]: A new message was received from non-LOCAL server. Buffer size: %d\n", _API_SERVER, size);
 }
 
 void printTrace(struct sockaddr_in src, struct sockaddr_in dest)

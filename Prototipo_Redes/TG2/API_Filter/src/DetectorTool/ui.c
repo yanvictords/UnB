@@ -45,14 +45,14 @@ void printGetInBlackListStatus(char * module, int status, struct sockaddr_in add
 {
 	char node_addr[4096];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
-	printf("[%s]: Status %d. [BLACKLIST] The host %s was found in the blacklist.\n@Action: All packets are being BLOCKED!\n", module, status, node_addr);
+	printf("[%s]: Status %d. [BLACKLIST] The host %s was found in the blacklist.\n@Action: All packets from this host must to be BLOCKED!\n", module, status, node_addr);
 }
 
 void printPutInBlackListStatus(char * module, int status, struct sockaddr_in addr)
 {
 	char node_addr[4096];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
-	printf("[%s]: Status %d. [BLACKLIST] The host %s was listed in the blacklist.\n@Action: All packets will be BLOCKED from now on!\n", module, status, node_addr);
+	printf("[%s]: Status %d. [BLACKLIST] The host %s was listed in the blacklist.\n@Action: All packets from this host must to be BLOCKED from now on!\n", module, status, node_addr);
 }
 
 void printFileNotFound(char * module, char * file)

@@ -12,7 +12,8 @@ int packageAnalyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
 		if(getAddrInBlackList(addr))
 		{
 			printGetInBlackListStatus(_MODULE_ANALYZER, _REJECT_ADDR, addr);	
-			return _REJECT_ADDR; // will be removed shortly	
+			// return _REJECT_ADDR; // will be removed shortly	
+			return _OK; // Now, the blacklisted IP will block in another local
 		}
 	}
 	int protocol =		identifier(addr.sin_port); // gets the protocol
@@ -55,7 +56,8 @@ int analyzePackageCounter(int counter, struct sockaddr_in addr, int protocol)
 			//	printAlertForgedReflector(_MODULE_ANALYZER, addr, protocol, counter);
 		printPutInBlackListStatus(_MODULE_ANALYZER, _REJECT_ADDR, addr);
 		putAddrInBlackList(addr);
-		return _REF_ATTACK_ALERT;
+		// return _REF_ATTACK_ALERT;
+		return _OK; // Now, the blacklisted IP will block in another local
 	}
 
 	printOkStatus(_MODULE_ANALYZER, _OK);
