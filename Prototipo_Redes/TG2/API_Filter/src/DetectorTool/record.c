@@ -115,6 +115,8 @@ void setProtocolRoot(int protocol, struct COUNT_ADDR * root)
 
 struct COUNT_ADDR * getProtocolRoot(int protocol)
 {
+	if(p_dns == NULL)
+		printf("EH NUL PORRA\n");
 	switch (protocol)
 	{
 		case _DNS:
