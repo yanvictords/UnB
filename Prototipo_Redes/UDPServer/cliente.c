@@ -7,7 +7,7 @@
 struct sockaddr_in remoto;
 
 #define PORTA 8000
-#define _IP "187.58.203.68"
+#define _IP "127.0.0.1"
 #define LEN 1000000
 #define IPARRAYLEN 20
 #define QUERYMAXLEN 4096
