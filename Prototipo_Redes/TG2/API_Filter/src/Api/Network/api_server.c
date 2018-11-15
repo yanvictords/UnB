@@ -2,6 +2,7 @@
 
 void apiServer()
 {
+	getNetworkConfInformations();
 	startApiServer();
 }
 
@@ -25,36 +26,36 @@ void startApiServer()
 
 void * localAreaNetwork(void * arg)
 {
-	sckLocal =		createSocket(_UDP);
+	_sckLocal =		createSocket(_UDP);
 	char buffer[_BUFFER_SIZE + _BUFFER_SIZE];
 	struct sockaddr_in aux;
 	
-	rcvLocalArea =		setAddrInfors(INADDR_ANY, _LOCAL_PORT);
+	rcvLocalArea =		setAddrInfors(INADDR_ANY, _local_interface_port);
 	sendLocalArea =		setCharAddrInfors(_LOCAL_IP_ADDRESS, _SERVER_LOCAL_PORT);
-	bindPort(sckLocal, rcvLocalArea);
+	bindPort(_sckLocal, rcvLocalArea);
 
 	while (true)
 	{
 		memset(buffer, 0x0, _BUFFER_SIZE);
 		localPackageListener(buffer);	
 	}
-	close(sckLocal);
+	close(_sckLocal);
 }
 
 void * nonLocalAreaNetwork(void * arg)
 {
-	sckNonLocal =		createSocket(_UDP);
+	_sckNonLocal =		createSocket(_UDP);
 	char buffer[_BUFFER_SIZE + _BUFFER_SIZE];
 
-	rcvNonLocalArea =		setAddrInfors(INADDR_ANY, _NON_LOCAL_PORT);
-	bindPort(sckNonLocal, rcvNonLocalArea);
+	rcvNonLocalArea =		setAddrInfors(INADDR_ANY, _non_local_interface_port);
+	bindPort(_sckNonLocal, rcvNonLocalArea);
 
 	while (true)
 	{
 		memset(buffer, 0x0, _BUFFER_SIZE);
 		nonLocalPackageListener(buffer);	
 	}
-	close(sckNonLocal);
+	close(_sckNonLocal);
 }
 
 void localPackageListener(char * buffer)
@@ -62,7 +63,7 @@ void localPackageListener(char * buffer)
 	int buffer_size;
 	int sizeAddr = sizeof(rcvLocalArea);	
 
-	if ((buffer_size =		rcvPackage(sckLocal, &rcvLocalArea, buffer, _BUFFER_SIZE)) <= 0)
+	if ((buffer_size =		rcvPackage(_sckLocal, &rcvLocalArea, buffer, _BUFFER_SIZE)) <= 0)
 		printf("[%s]: Recvfrom local host failed!\n", _API_SERVER);
 	else
 	{
@@ -86,7 +87,7 @@ void nonLocalPackageListener(char * buffer)
 	int buffer_size;
 	int sizeAddr = sizeof(rcvNonLocalArea);
 
-	if ((buffer_size =		rcvPackage(sckNonLocal, &rcvNonLocalArea, buffer, _BUFFER_SIZE+_BUFFER_SIZE)) <= 0)
+	if ((buffer_size =		rcvPackage(_sckNonLocal, &rcvNonLocalArea, buffer, _BUFFER_SIZE+_BUFFER_SIZE)) <= 0)
 	    printf("[%s]: Recvfrom non-local host failed!\n", _API_SERVER);
 	else
 	{
@@ -106,7 +107,7 @@ void localPackageSender(char * buffer, int buffer_size)
 {
 	printTrace(rcvNonLocalArea, sendLocalArea);
 
-	if (sendPackage(sckLocal, &sendLocalArea, buffer, buffer_size) < 0)
+	if (sendPackage(_sckLocal, &sendLocalArea, buffer, buffer_size) < 0)
         printf("[%s]: Sendto local host failed!\n", _API_SERVER);
 	else
 		printf("[%s]: The package was successfully forwarded to local host!\n", _API_SERVER);
@@ -116,7 +117,7 @@ void nonLocalPackageSender(char * buffer, int buffer_size, struct sockaddr_in de
 {
 	printTrace(rcvLocalArea, destAddr);
 
-	if (sendPackage(sckNonLocal, &destAddr, buffer, buffer_size) < 0)
+	if (sendPackage(_sckNonLocal, &destAddr, buffer, buffer_size) < 0)
         printf("[%s]: Sendto non-local host failed!\n", _API_SERVER);
 	else
 		printf("[%s]: The package was successfully forwarded to non-local host!\n", _API_SERVER);
@@ -177,3 +178,61 @@ void printHost(struct sockaddr_in * host)
 	printf("\nPrint Host: [%s:%d]\n", node_addr, htons(host->sin_port));
 }
 
+void getNetworkConfInformations()
+{
+	FILE *networkConf;
+	
+	printf("[%s]: ### Reading the networking settings... ###\n", _API_SERVER);
+
+	if(!(networkConf = fopen(_NETWORK_CONF_FILE, "r+")))
+	{
+		printf("[%s]: File %s was not found!\n", _API_SERVER, _NETWORK_CONF_FILE);
+		generateNetworkConfFile(networkConf);
+	}
+	else
+	{
+		char lanPort[6];
+		char nonLanPort[6];
+
+		fscanf(networkConf, "######## Network Settings ########\n@LOCAL_interface:\nport: %s\n\n@NONLOCAL_interface:\nport: %s\n", lanPort, nonLanPort);
+
+		_local_interface_port = atoi(lanPort);
+		_non_local_interface_port = atoi(nonLanPort);
+
+		fclose(networkConf);
+
+		if (invalidPort(_local_interface_port) || invalidPort(_non_local_interface_port))
+			exit(1);
+	}
+}
+
+void generateNetworkConfFile(FILE * networkConf)
+{
+	networkConf = fopen(_NETWORK_CONF_FILE, "w+");
+
+	printf("\n[%s]: ### Generating the Networking Settings... ###\n", _API_SERVER);
+
+	do {
+		printf("[%s]: Local Port: ", _API_SERVER);
+		scanf("%d", &_local_interface_port);
+	} while ( invalidPort(_local_interface_port) );
+
+	do {
+		printf("[%s]: Non-Local Port: ", _API_SERVER);
+		scanf("%d", &_non_local_interface_port);
+	} while ( invalidPort(_non_local_interface_port) );
+
+	fprintf(networkConf, "######## Network Settings ########\n@LOCAL_interface:\nport: %d\n\n@NONLOCAL_interface:\nport: %d\n", _local_interface_port, _non_local_interface_port);
+	
+	fclose(networkConf);
+}
+
+bool invalidPort(int port) 
+{
+	bool isInvalid = (port <= 0 || port > 65535);
+	
+	if (isInvalid)
+		printf("[%s]: [ERROR] The port %d is out of range! Try another port...\n", _API_SERVER, port);
+
+	return isInvalid;
+}

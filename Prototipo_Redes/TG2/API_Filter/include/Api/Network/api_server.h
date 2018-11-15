@@ -15,8 +15,11 @@
 
 #define _LOCAL_IP_ADDRESS "127.0.0.1"
 #define _SERVER_LOCAL_PORT 3000
-#define _LOCAL_PORT 9000
-#define _NON_LOCAL_PORT 8000
+// #define _LOCAL_PORT 9000
+// #define _NON_LOCAL_PORT 8000
+
+//===== NETWORK CONFIGURATION FILE
+#define _NETWORK_CONF_FILE "network.conf"
 
 //===== MODULE
 #define _API_SERVER "API_SERVER"
@@ -29,8 +32,11 @@ struct sockaddr_in rcvNonLocalArea;
 struct sockaddr_in sendLocalArea;
 struct sockaddr_in sendNonLocalArea;
 
-int sckLocal;
-int sckNonLocal;
+int _sckLocal;
+int _sckNonLocal;
+
+int _local_interface_port;
+int _non_local_interface_port;
 
 void apiServer();
 void startApiServer();
@@ -46,3 +52,6 @@ char * getPackageContent(char * buffer);
 char * putHeaderDestAddr(char * buffer, struct sockaddr_in * destAddr);
 struct sockaddr_in getHeaderDestAddr(char * buffer);
 void printHost(struct sockaddr_in * host);
+void getNetworkConfInformations();
+void generateNetworkConfFile(FILE * networkConf);
+bool invalidPort(int port);

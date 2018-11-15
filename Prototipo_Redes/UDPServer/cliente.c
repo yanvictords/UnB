@@ -6,8 +6,8 @@
 
 struct sockaddr_in remoto;
 
-#define PORTA 2000
-#define _IP "127.0.0.1"
+#define PORTA 8000
+#define _IP "187.58.203.68"
 #define LEN 1000000
 #define IPARRAYLEN 20
 #define QUERYMAXLEN 4096
@@ -82,7 +82,7 @@ int main()
 		printf("Lendo arquivo\n");
 //		fread(buffer, (QUERYMAXLEN) * sizeof(char_type), 1, arq);
 
-		printf("teste: \n%s", buffer);
+		printf("Enviando a palavra teste\n");
 
 		if(sendto(sockfd, "teste", sizeof("teste"), 0, cast_remoto, tam_addr_remoto)) // faz um pedido ao proxy
 		{

@@ -16,7 +16,7 @@ struct COUNT_ADDR
 	int count;
 	struct in_addr sin_addr;
 	struct COUNT_ADDR * next;
-} *p_dns, *p_ntp, *p_snmp, *p_ssdp;
+} *_pDns, *_pNtp, *_pSnmp, *_pSsdp;
 
 int record(struct in_addr sin_addr, int operation, int protocol);
 int updateCountersList(struct in_addr sin_addr, int operation, int protocol);

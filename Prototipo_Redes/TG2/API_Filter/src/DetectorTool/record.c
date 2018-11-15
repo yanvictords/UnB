@@ -99,16 +99,16 @@ void setProtocolRoot(int protocol, struct COUNT_ADDR * root)
 	switch (protocol)
 	{
 		case _DNS:
-			p_dns = root;
+			_pDns = root;
 			break;
 		case _NTP:
-			p_ntp = root;
+			_pNtp = root;
 			break;
 		case _SNMP:
-			p_snmp = root;
+			_pSnmp = root;
 			break;
 		case _SSDP:
-			p_ssdp = root;
+			_pSsdp = root;
 			break;
 	}
 }
@@ -118,13 +118,13 @@ struct COUNT_ADDR * getProtocolRoot(int protocol)
 	switch (protocol)
 	{
 		case _DNS:
-			return p_dns;
+			return _pDns;
 		case _NTP:
-			return p_ntp;
+			return _pNtp;
 		case _SNMP:
-			return p_snmp;
+			return _pSnmp;
 		case _SSDP:
-			return p_ssdp;
+			return _pSsdp;
 	}
 }
 

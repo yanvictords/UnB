@@ -75,7 +75,7 @@ bool getAddrInBlackList(struct sockaddr_in addr)
 	}
 
 	char ipAddr[4096];
-	char node_addr[40496];
+	char node_addr[4096];
 	
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 
