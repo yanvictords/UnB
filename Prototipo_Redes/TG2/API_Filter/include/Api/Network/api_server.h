@@ -19,8 +19,7 @@ struct sockaddr_in _destinyAddr;
 int _sckRaw;
 int _sckUdp;
 bool _running;
-bool _isLan;
 
 void apiServer();
 void startApiServer();
-bool lanWanVerifier(struct sockaddr_in _sourceAddr);
+_Bool shouldAnalyzePackage(int _sckRaw, char * buffer);

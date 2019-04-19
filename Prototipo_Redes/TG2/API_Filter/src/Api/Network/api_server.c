@@ -30,13 +30,20 @@ void startApiServer()
 		memset(buffer, 0x0, _BUFFER_SIZE);
 		if(bufferSize = listenToPackages(_sckRaw, buffer, _BUFFER_SIZE, &_destinyAddr) > 0)
 		{	 
-			if(!ifLocalIpAddress(_sckRaw, buffer) && ifIsUdpProtocol(buffer))
+			if(shouldAnalyzePackage(_sckRaw, buffer))
 			{
 				printAllPacketContent(buffer);	
+	
 				_destinyAddr = mountAddr(getDAddrFromBuffer(buffer).s_addr, getDPortFromBuffer(buffer));
 				detectorTool(_destinyAddr, getPayload(buffer), ifLanIpAddress(inet_ntoa(getSAddrFromBuffer(buffer))));
 				// sendPackage(_sckUdp, getPayload(buffer), _destinyAddr);
 			}
 		}
 	}
+}
+
+_Bool shouldAnalyzePackage(int sck, char * buffer)
+{
+	return  (!ifLocalIpAddress(sck, buffer) && 
+			ifIsUdpProtocol(buffer));
 }
