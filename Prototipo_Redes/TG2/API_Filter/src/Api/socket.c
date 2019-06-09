@@ -47,9 +47,9 @@ int connectSocket (int socket, 	struct sockaddr_in server) {
 	int status; 
 
 	if (status = connect(socket, (struct sockaddr *) &server, sizeof(server)) == -1) {
-		printf("The intermediate server isn't available!\n");	
+		printf("The proxy server isn't available!\n");	
 	}	else {
-		printf("The connection with the intermediate server was established!\n");
+		printf("The connection with the proxy server was established!\n");
 	}
 
 	return status;
