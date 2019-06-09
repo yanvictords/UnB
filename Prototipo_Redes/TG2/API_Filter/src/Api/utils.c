@@ -4,18 +4,20 @@
 
 // ------------ MOUNT's
 
-struct sockaddr_in mountAddr (unsigned long ipAddr, unsigned int port) {
-	struct sockaddr_in addr;
-	addr.sin_addr.s_addr = ipAddr;
-	addr.sin_port = port;
-	addr.sin_family = AF_INET;
-	memset(addr.sin_zero, 0x0, 8);
+struct sockaddr_in * mountAddr (unsigned long ipAddr, unsigned int port) {
+	struct sockaddr_in * addr = (struct sockaddr_in *) malloc(sizeof(struct sockaddr_in));
+
+	addr->sin_addr.s_addr = ipAddr;
+	addr->sin_port = port;
+	addr->sin_family = AF_INET;
+	memset(addr->sin_zero, 0x0, 8);
 
 	return addr;
 }
 
 struct sockaddr_in mountCharAddrInfors (char * ipAddress, unsigned int port) {
 	struct sockaddr_in addr;
+	
 	addr.sin_family = AF_INET; 
 	addr.sin_port = htons(port);
 	addr.sin_addr.s_addr = inet_addr(ipAddress);

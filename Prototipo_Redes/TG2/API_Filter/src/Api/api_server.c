@@ -8,19 +8,18 @@
 #define _BUFFER_SIZE 65536
 #define _LOW_BUFFER_SIZE 4096
 
+// ----- Global variables
 struct sockaddr_in _midServer;
-struct sockaddr_in _sourceAddr;
-struct sockaddr_in _destinyAddr;
-int _status;
 int _sckRaw;
 _Bool _running;
-_Bool _isLocal;
 
+// ----- Functions
 void startApiServer();
 _Bool ifLanIpAddress(struct in_addr ipAddr);
 _Bool ifIsUdpProtocol(char * buffer);
 void * blackListSender(void * ipAddress);
 
+// ----- Main
 int main () {
 	system("@cls||clear");
 	printf("\n*************************************************\n");
@@ -37,37 +36,42 @@ int main () {
 }
 
 void startApiServer () {
-	struct sockaddr_in * hostToAnalyzer;
 	char buffer[_BUFFER_SIZE];
 	long bufferSize;
 
-	printf("[%s]: Starting Api server...\n", _API_SERVER);
 	_sckRaw = createSocket(_RAW_ETH);
+	if (_sckRaw == -1) {
+		_running = false;
+	}
+
 	setEthHeaderInSocket(_sckRaw);
 
+	printf("[%s]: Starting Api server...\n", _API_SERVER);
+	
 	while (_running) {	
+		struct sockaddr_in * hostToAnalyzer;
 		memset(buffer, 0x0, _BUFFER_SIZE);
 
 		// Listening for incoming packages
-		if (bufferSize = listenToPackages(_RAW_ETH, _sckRaw, buffer, _BUFFER_SIZE, &_destinyAddr) > 0
+		if (bufferSize = listenToPackages(_RAW_ETH, _sckRaw, buffer, _BUFFER_SIZE, hostToAnalyzer) > 0
 				&& ifIsUdpProtocol(buffer)) {	 
 			
 			printAllPacketContent(buffer);
 
-			_isLocal = ifLanIpAddress(getSAddrFromBuffer(buffer));
-			_sourceAddr = mountAddr(getSAddrFromBuffer(buffer).s_addr, getSPortFromBuffer(buffer));
-			_destinyAddr = mountAddr(getDAddrFromBuffer(buffer).s_addr, getDPortFromBuffer(buffer));
-			
+			bool isLocal = ifLanIpAddress(getSAddrFromBuffer(buffer));
+
 			// Always gets the WAN address
-			hostToAnalyzer = _isLocal ? &_destinyAddr : &_sourceAddr;
-			_status = detector(*hostToAnalyzer, getPayload(buffer), _isLocal);
+			hostToAnalyzer = isLocal ? mountAddr(getDAddrFromBuffer(buffer).s_addr, getDPortFromBuffer(buffer))
+																: mountAddr(getSAddrFromBuffer(buffer).s_addr, getSPortFromBuffer(buffer));
+
+			int status = detector(*hostToAnalyzer, getPayload(buffer), isLocal);
 
 			// If status is -1, then the address analyzed is a reflector
-			if (_status < 0) {
+			if (status < 0) {
 				pthread_t worker;
 				char * ipToBlock = inet_ntoa(hostToAnalyzer->sin_addr);
 
-				// Sending to the intermediate server that is responsible for dropping packages coming from this Ip address
+				// Sending to the intermediate server that is responsible for dropping packages coming from blacklisted addresses
 				pthread_create(&worker, NULL, blackListSender, (void *) ipToBlock);
 			}
 		}
@@ -76,8 +80,8 @@ void startApiServer () {
 
 _Bool ifLanIpAddress (struct in_addr ipAddr) {
 	return strncmp("10", inet_ntoa(ipAddr), sizeof("10")) == 0
-					|| strncmp("172.16", inet_ntoa(ipAddr), sizeof("172.16")) == 0
-					|| strncmp("192.168", inet_ntoa(ipAddr), sizeof("192.168")) == 0;
+				|| strncmp("172.16", inet_ntoa(ipAddr), sizeof("172.16")) == 0
+				|| strncmp("192.168", inet_ntoa(ipAddr), sizeof("192.168")) == 0;
 }
 
 _Bool ifIsUdpProtocol (char * buffer) {

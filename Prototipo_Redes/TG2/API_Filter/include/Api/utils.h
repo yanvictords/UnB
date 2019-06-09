@@ -18,7 +18,7 @@
 
 #define _UDP_PROTOCOL 17
 
-struct sockaddr_in mountAddr (unsigned long ipAddr, unsigned int port);
+struct sockaddr_in * mountAddr (unsigned long ipAddr, unsigned int port);
 struct sockaddr_in mountCharAddrInfors (char * ipAddress, unsigned int port);
 char * getPayload (char * buffer);
 unsigned int getSPortFromBuffer (char * buffer);

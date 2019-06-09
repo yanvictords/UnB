@@ -27,7 +27,6 @@ int createSocket (int type) {
 
 	if (sck < 0) {
 		printf("[%s]: There was a problem creating the socket.\n", _SOCKET);
-		exit(1);
 	} else {
 		printf("[%s]: Socket %s was successfully created!\n", _SOCKET, sckTypeName);
 	}
@@ -38,7 +37,6 @@ int createSocket (int type) {
 void bindPort (int sck, struct sockaddr_in addr) {
 	if (bind(sck, (struct sockaddr *) &addr, sizeof(addr)) == -1 ) {	
 		printf("[%s]: There was a problem opening the port %d...\n", _SOCKET, htons(addr.sin_port));
-		perror("erro");
 		exit(1);
 	} else {
 		printf("[%s]: Port %d was successfully opened! Listening...\n", _SOCKET, htons(addr.sin_port));
@@ -51,7 +49,7 @@ int connectSocket (int socket, 	struct sockaddr_in server) {
 	if (status = connect(socket, (struct sockaddr *) &server, sizeof(server)) == -1) {
 		printf("The intermediate server isn't available!\n");	
 	}	else {
-		printf("The connection with intermediate server was established!\n");
+		printf("The connection with the intermediate server was established!\n");
 	}
 
 	return status;

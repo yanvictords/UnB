@@ -9,7 +9,7 @@ int detector (struct sockaddr_in addr, char * buffer, bool localNetHost) {
 	int status;
 
 	printBegin();
-	status = 		packageAnalyzer(addr, buffer, localNetHost);
+	status = packageAnalyzer(addr, buffer, localNetHost);
 	printEnd();
 
 	return status;
@@ -23,7 +23,7 @@ int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) 
 	}
 	
 	// Checks if the protocol can be analyzed by this framework.
-	int protocol =		identifier(addr.sin_port); // gets the protocol
+	int protocol = identifier(addr.sin_port); // gets the protocol
 
 	if (!protocol) {
 		printUnknownProtocol(_MODULE_ANALYZER);		
@@ -32,14 +32,14 @@ int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) 
 	}
 
 	// Checks the operation type (REQUEST or RESPONSE)
-	long long operation =		decoder(protocol, buffer);
+	long long operation = decoder(protocol, buffer);
 
 	// The operation is valid only if the package is a LAN request or WAN response
 	if ((localNetHost && operation == _REQUEST) || (!localNetHost && operation == _RESPONSE)) {
 		system("@cls||clear");
 		printBegin();
 		
-		long long counter = 		record(addr.sin_addr, operation, protocol);
+		long long counter = record(addr.sin_addr, operation, protocol);
 
 		#ifdef _DEBUGGER_MODE		
 			printAllCounters(protocol);
