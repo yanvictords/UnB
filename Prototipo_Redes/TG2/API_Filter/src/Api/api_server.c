@@ -61,7 +61,8 @@ void startApiServer () {
 			bool isLocal = ifLanIpAddress(getSAddrFromBuffer(buffer));
 
 			// Always gets the WAN address
-			hostToAnalyzer = isLocal ? mountAddr(getDAddrFromBuffer(buffer).s_addr, getDPortFromBuffer(buffer))
+			hostToAnalyzer = isLocal ? 
+							mountAddr(getDAddrFromBuffer(buffer).s_addr, getDPortFromBuffer(buffer))
 						: mountAddr(getSAddrFromBuffer(buffer).s_addr, getSPortFromBuffer(buffer));
 
 			int status = detector(*hostToAnalyzer, getPayload(buffer), isLocal);
