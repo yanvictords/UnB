@@ -19,7 +19,7 @@ _Bool _isLocal;
 void startApiServer();
 _Bool ifLanIpAddress(struct in_addr ipAddr);
 _Bool ifIsUdpProtocol(char * buffer);
-void * blackListSender(void *);
+void * blackListSender(void * ipAddress);
 
 int main () {
 	system("@cls||clear");
