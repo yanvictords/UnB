@@ -1,21 +1,12 @@
 //===== MODULE
 #define _API_SERVER "SERVER"
 
-#define _BUFFER_SIZE 65536
-
-//===== NETWORK CONFIGURATION FILE
-#define _NETWORK_CONF_FILE "network.conf"
-
-//===== VARIABLES
-#define _HEADER_ADDR_SZ sizeof(struct sockaddr)
-#define _SOURCE 0
-#define _DESTINY 1
-
 //===== SIZEOF's
 #define _SIZE_OF_ETH sizeof(struct ethhdr)
 #define _SIZE_OF_IP sizeof(struct iphdr)
 #define _SIZE_OF_UDP sizeof(struct udphdr)
 
+#define _BUFFER_SIZE 65536
 #define _UDP_PROTOCOL 17
 
 struct sockaddr_in * mountAddr (unsigned long ipAddr, unsigned int port);

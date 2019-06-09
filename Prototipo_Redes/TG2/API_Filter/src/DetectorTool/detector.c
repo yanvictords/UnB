@@ -41,9 +41,9 @@ int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) 
 		
 		long long counter = record(addr.sin_addr, operation, protocol);
 
-		#ifdef _DEBUGGER_MODE		
-			printAllCounters(protocol);
-		#endif
+			if (_DEBUG_MODE) {
+				printAllCounters(protocol);
+			}	
 
 		// Is useful to analyze the counter only when is a WAN response
 		if (!localNetHost) {
@@ -57,7 +57,7 @@ int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) 
 
 int analyzePackageCounter (long long counter, struct sockaddr_in addr, int protocol) {
 	// If negative counter, probably the server is a reflector
-	if (counter < _LOW_LIMIT) {
+	if (counter < (_LOW_LIMIT * (-1))) {
 		// This module gives us certainty if the host is even a reflector
 		// bool reflector = 	traceRouteAnalyzer(addr);	
 		printErrorStatus(_MODULE_ANALYZER, _REF_ATTACK_ALERT, "Much more replies than requests was detected (Outside->Inside).");
@@ -79,8 +79,8 @@ bool getAddrInBlackList (struct sockaddr_in addr) {
 	char node_addr[4096];
 	FILE *file;
 
-	if (!(file = fopen(_BLACK_LIST_FILE, "r+"))) {
-		printFileNotFound(_MODULE_ANALYZER, _BLACK_LIST_FILE);
+	if (!(file = fopen(_BLACKLIST_FILE, "r+"))) {
+		printFileNotFound(_MODULE_ANALYZER, _BLACKLIST_FILE);
 		return false;
 	}
 	
@@ -102,7 +102,7 @@ void putAddrInBlackList (struct sockaddr_in addr) {
 	char node_addr[4096];
 	FILE *file;
 
-	file = fopen(_BLACK_LIST_FILE, "a+");
+	file = fopen(_BLACKLIST_FILE, "a+");
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 	
 	fprintf(file, "%s\n", node_addr);

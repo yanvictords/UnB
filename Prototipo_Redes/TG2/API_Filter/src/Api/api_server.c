@@ -2,10 +2,8 @@
 #include "../../include/Api/utils.h"
 #include "../../include/Api/socket.h"
 #include "../../include/DetectorTool/detector.h"
-#include <stdbool.h>
 #include "pthread.h"
 
-#define _BUFFER_SIZE 65536
 #define _LOW_BUFFER_SIZE 4096
 
 // ----- Global variables
@@ -14,6 +12,9 @@ int _sckRaw;
 _Bool _running;
 
 // ----- Functions
+
+void initConfiguration();
+void printConfiguration();
 void startApiServer();
 _Bool ifLanIpAddress(struct in_addr ipAddr);
 _Bool ifIsUdpProtocol(char * buffer);
@@ -22,17 +23,59 @@ void * blackListSender(void * ipAddress);
 // ----- Main
 int main () {
 	system("@cls||clear");
-	printf("\n*************************************************\n");
-	printf("* Welcome to API Filter! Created by: Yan Victor *\n");
-	printf("*************************************************\n\n");
+	printf("\n***********************************************************\n");
+	printf("* Welcome to API Reflectors Detection! Author: Yan Victor *\n");
+	printf("***********************************************************\n\n");
 
-	_midServer = mountCharAddrInfors("192.168.25.6", 7000);
+	initConfiguration();
+	printConfiguration();
+
+	_midServer = mountCharAddrInfors(_PROXY_IP, _PROXY_PORT);
 	
 	_running = true;
 	startApiServer();
 	
 	closeSocket(&_sckRaw);
 	return 0;
+}
+
+void initConfiguration () {
+	FILE *file;
+	char debug;
+	if (!(file = fopen(_CONFIG_FILE, "r+"))) {
+		printf("Settings file is missing. Failed to start Api :(.\n");
+		exit(1);
+	}
+
+	fscanf(file, "######## API Settings ########\n");
+	fscanf(file, "@proxy_server_address:\n*ip: %s\n*port: %d\n", _PROXY_IP, &_PROXY_PORT);
+	fscanf(file, "@blacklist_name: %s\n", _BLACKLIST_FILE);
+	fscanf(file, "@limit_of_packages: %lld\n", &_LOW_LIMIT);
+	fscanf(file, "@debug_mode (y/n): %c\n", &debug);
+
+	if (debug == 'y') {
+		_DEBUG_MODE = 1;
+	} else {
+		_DEBUG_MODE = 0;
+	}
+
+	fclose(file);
+}
+
+void printConfiguration () {
+	printf("=> Ambient Configuration: \n");
+	printf("| Proxy: %s:%d\n", _PROXY_IP, _PROXY_PORT);
+	printf("| BlackList name: %s\n", _BLACKLIST_FILE);
+	printf("| Limit of packages: %lld\n", _LOW_LIMIT);
+
+	if (_DEBUG_MODE) {
+		printf("| Debug Mode: ON\n");
+	} else {
+		printf("| Debug Mode: OFF\n\n");
+	}
+
+	printf("\n...Press <ENTER> to start API...");
+	getchar();
 }
 
 void startApiServer () {
@@ -55,8 +98,9 @@ void startApiServer () {
 		// Listening for incoming packages
 		if (bufferSize = listenToPackages(_RAW_ETH, _sckRaw, buffer, _BUFFER_SIZE, hostToAnalyzer) > 0
 				&& ifIsUdpProtocol(buffer)) {	 
-			
-			printAllPacketContent(buffer);
+			if (_DEBUG_MODE) {
+				printAllPacketContent(buffer);
+			}
 
 			bool isLocal = ifLanIpAddress(getSAddrFromBuffer(buffer));
 

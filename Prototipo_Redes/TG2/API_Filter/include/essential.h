@@ -14,5 +14,13 @@
 #include <sys/cdefs.h>
 #include <sys/ioctl.h>
 
-//===== FILE
-#define _BLACK_LIST_FILE "blacklist.txt"
+//===== CONFIGURATION FILE
+#define _CONFIG_FILE "API.conf"
+
+//===== API.conf
+char _PROXY_IP[100];
+int _PROXY_PORT;
+char _BLACKLIST_FILE[100];
+long long _LOW_LIMIT;
+int _DEBUG_MODE;
+

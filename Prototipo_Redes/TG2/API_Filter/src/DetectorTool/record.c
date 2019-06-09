@@ -77,7 +77,7 @@ bool mustKeepHostOnTheList (struct COUNT_ADDR * listAux) {
 	}
 
 	// If the counter demonstrate a characteristic of DDoS attack by reflection
-	if (listAux->count < _LOW_LIMIT) {
+	if (listAux->count < (_LOW_LIMIT * (-1))) {
 		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "[WARNING] Anomalous operation. The counter negative value is less than allowed.");
 		return false;
 	}
