@@ -62,7 +62,7 @@ void startApiServer () {
 
 			// Always gets the WAN address
 			hostToAnalyzer = isLocal ? mountAddr(getDAddrFromBuffer(buffer).s_addr, getDPortFromBuffer(buffer))
-																: mountAddr(getSAddrFromBuffer(buffer).s_addr, getSPortFromBuffer(buffer));
+						: mountAddr(getSAddrFromBuffer(buffer).s_addr, getSPortFromBuffer(buffer));
 
 			int status = detector(*hostToAnalyzer, getPayload(buffer), isLocal);
 
@@ -80,8 +80,8 @@ void startApiServer () {
 
 _Bool ifLanIpAddress (struct in_addr ipAddr) {
 	return strncmp("10", inet_ntoa(ipAddr), sizeof("10")) == 0
-				|| strncmp("172.16", inet_ntoa(ipAddr), sizeof("172.16")) == 0
-				|| strncmp("192.168", inet_ntoa(ipAddr), sizeof("192.168")) == 0;
+		|| strncmp("172.16", inet_ntoa(ipAddr), sizeof("172.16")) == 0
+		|| strncmp("192.168", inet_ntoa(ipAddr), sizeof("192.168")) == 0;
 }
 
 _Bool ifIsUdpProtocol (char * buffer) {
