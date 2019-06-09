@@ -8,7 +8,6 @@
 #define _BUFFER_SIZE 65536
 #define _LOW_BUFFER_SIZE 4096
 
-pthread_mutex_t toSend = PTHREAD_MUTEX_INITIALIZER;
 struct sockaddr_in _midServer;
 struct sockaddr_in _sourceAddr;
 struct sockaddr_in _destinyAddr;
