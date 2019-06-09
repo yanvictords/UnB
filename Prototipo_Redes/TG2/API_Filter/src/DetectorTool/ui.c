@@ -2,8 +2,7 @@
 
 #include <time.h>
 
-void printBegin()
-{
+void printBegin () {
 	printf("\n================== DETECTOR MODULE ==================\n");
 	printf("|Analyzing packet...\n");
 	/*PRINT_COLOR(RED, "\ntestando");
@@ -20,14 +19,12 @@ void printBegin()
 	PRINT_COLOR(BOLD_MAGENTA, "testando\n");*/
 }
 
-void printEnd()
-{
+void printEnd () {
 	printTime();
 	printf("\n=============== END - DETECTOR MODULE ===============\n\n");
 }
 
-void printQueryType(char * module, int operation)
-{
+void printQueryType (char * module, int operation) {
 	if (operation == 1)
 		printf("[%s]: The package is a QUERY/REQUEST\n", module);
 	else if (operation == (-1))
@@ -36,52 +33,43 @@ void printQueryType(char * module, int operation)
 		printf("[%s]: The package type is UNKNOWN\n", module);
 }
 
-void printUnknownProtocol(char * module)
-{
+void printUnknownProtocol (char * module) {
 	printf("[%s]: Unknown protocol. The packet can't be decoded...\n", module);
 }
 
-void printOkStatus(char * module, int status)
-{
+void printOkStatus (char * module, int status) {
 	printf("[%s]: Status %d. The package can be forwarded without problems!\n", module, status);
 }
 
-void printErrorStatus(char * module, int status, char * exception)
-{
+void printErrorStatus (char * module, int status, char * exception) {
 	printf("[%s]: Status %d. [ERROR] A problem was detected!\n=> Thrown Exception: %s\n", module, status, exception); 	
 }
 
-void printAnotherStatus(char * module, int status, char * event)
-{
+void printAnotherStatus (char * module, int status, char * event) {
 	printf("[%s]: Status %d. Event Description: %s\n", module, status, event);
 }
 
-void printGetInBlackListStatus(char * module, int status, struct sockaddr_in addr)
-{
+void printGetInBlackListStatus (char * module, int status, struct sockaddr_in addr) {
 	char node_addr[4096];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 	printf("[%s]: Status %d. [BLACKLIST] The host %s was found in the blacklist.\n@Action: All packets from this host must to be BLOCKED!\n", module, status, node_addr);
 }
 
-void printPutInBlackListStatus(char * module, int status, struct sockaddr_in addr)
-{
+void printPutInBlackListStatus (char * module, int status, struct sockaddr_in addr) {
 	char node_addr[4096];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 	printf("[%s]: Status %d. [BLACKLIST] The host %s was listed in the blacklist.\n@Action: All packets from this host must to be BLOCKED from now on!\n", module, status, node_addr);
 }
 
-void printFileNotFound(char * module, char * file)
-{
+void printFileNotFound (char * module, char * file) {
 	printf("[%s]: [ERROR] File %s was not found!\n", module, file);
 }
 
-void printProtocolName(char * module, int protocol)
-{
+void printProtocolName (char * module, int protocol) {
 	printf("[%s]: %s protocol detected.\n", module, getProtocolName(protocol));
 }
 
-void printAlert(char * module, struct sockaddr_in addr, int protocol, int counter)
-{
+void printAlert (char * module, struct sockaddr_in addr, int protocol, int counter) {
 	char node_addr[4096];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 
@@ -92,8 +80,7 @@ void printAlert(char * module, struct sockaddr_in addr, int protocol, int counte
 	PRINT_COLOR(RED, "************************ ALERT ****************************\n\n");
 }
 
-void printAlertForgedReflector(char * module, struct sockaddr_in addr, int protocol, int counter)
-{
+void printAlertForgedReflector (char * module, struct sockaddr_in addr, int protocol, int counter) {
 	char node_addr[4096];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 
@@ -104,8 +91,14 @@ void printAlertForgedReflector(char * module, struct sockaddr_in addr, int proto
 	printf("************************ALERT****************************\n\n");
 }
 
-char * getProtocolName(int protocol)
-{
+void printTime () {
+	time_t mytime = time(NULL);
+    char * time_str = ctime(&mytime);
+    time_str[strlen(time_str)-1] = '\0';
+    printf("[%s]", time_str);
+}
+
+char * getProtocolName (int protocol) {
 	switch (protocol)
 	{
 		case 1: //dns
@@ -118,12 +111,4 @@ char * getProtocolName(int protocol)
 			return "SSDP";
 	}
 	return "UNKNOWN";
-}
-
-void printTime()
-{
-	time_t mytime = time(NULL);
-    char * time_str = ctime(&mytime);
-    time_str[strlen(time_str)-1] = '\0';
-    printf("[%s]", time_str);
 }

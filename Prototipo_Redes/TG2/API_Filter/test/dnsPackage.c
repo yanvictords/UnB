@@ -28,7 +28,7 @@ void mountDnsPackage(unsigned char queryOrResponse, char * buf, char * host)
 
     int lock = 0 , i;
     strcat((char*)host,".");
-     queryOrResponse
+     
     for(i = 0 ; i < strlen((char*)host) ; i++) 
     {
         if(host[i]=='.') 

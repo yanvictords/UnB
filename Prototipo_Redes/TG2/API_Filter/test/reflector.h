@@ -11,7 +11,7 @@
 
 #include "dnsPackage.h"
 
-#define _DNS_PORT 503
+#define _DNS_PORT 5003
 
 #define _VICTIM_PORT 8000
 #define _VICTIM_ADDRESS "127.0.0.1"

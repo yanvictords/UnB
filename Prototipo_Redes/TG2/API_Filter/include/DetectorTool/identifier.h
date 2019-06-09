@@ -8,7 +8,7 @@
 #define _UNKNOWN_PROTOCOL 0
 
 //===== PROTOCOLS PORTS
-#define _DNS_PORT 53 // just for testings. Should be removed shortly. Please, remember to change back to 53 soon
+#define _DNS_PORT 5003
 #define _NTP_PORT 123
 #define _SNMP_PORT 161
 #define _SSDP_PORT 1900
@@ -17,6 +17,5 @@
 //===== MODULE
 #define _MODULE_IDENTIFIER "IDENTIFIER"
 
-int identifier(unsigned short port);
-int protocolIdentifier(unsigned short port);
-int identifyByPort(int port);
+int identifier (unsigned short port);
+int identifyByPort (int port);

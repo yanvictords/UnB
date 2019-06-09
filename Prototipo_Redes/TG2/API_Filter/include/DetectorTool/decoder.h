@@ -35,9 +35,8 @@ struct DNS_HEADER
     byte_2 ar_count; 
 };
 
-int decoder(int protocol,  char * buffer);
-int packageDecoder(int protocol,  char * buffer);
+long long decoder (int protocol,  char * buffer);
 int getDnsQueryType(char * buffer);
-int getNtpQueryType(char * buffer);
-int getSnmpQueryType(char * buffer);
-int getSsdpQueryType(char * buffer);
+int getNtpQueryType (char * buffer);
+int getSnmpQueryType (char * buffer);
+int getSsdpQueryType (char * buffer);
