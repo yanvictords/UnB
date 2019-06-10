@@ -3,15 +3,14 @@
 // CLIENTE DE TESTE 
 
 #include "refdec.h"
-#include "../TG2/API_Filter/include/Api/Network/utils.h"
 struct sockaddr_in remoto;
 struct sockaddr_in source;
 
-#define PORTA 8080
+#define PORTA 3000
 #define PORTA_ORIGEM 4000
 #define _IP "127.0.0.1"
 // #define _IP "192.168.25.18"
-#define LEN 4096
+#define LEN 65536
 #define IPARRAYLEN 20
 #define QUERYMAXLEN 4096
 
@@ -79,7 +78,6 @@ int main()
 		if((slen = recvfrom(sockfd, buffer, LEN, 0, cast_remoto, &tam_addr_remoto)) > 0) // Na primeira vez, espera a mensagem de bem-vindo do proxy; Recebe pedidos do proxy
 		{
 			buffer[slen] = '\0';
-		    //ip = (char_type*)malloc(IPARRAYLEN * sizeof(char_type));
 			printf("buffer: %s\n", buffer);
 			printHost((struct sockaddr_in *) cast_remoto);
 		}

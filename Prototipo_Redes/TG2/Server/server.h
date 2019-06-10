@@ -7,10 +7,8 @@
 #include <netinet/in.h>
 #include <netdb.h>
 
-#define _PORT 7000
+#define _PORT 3000
 #define _LEN 65536
-#define _BLACKLIST_FILE "../blacklist.txt"
 
-struct sockaddr_in proxyServer, server;
+struct sockaddr_in server, client;
 _Bool _running;
-

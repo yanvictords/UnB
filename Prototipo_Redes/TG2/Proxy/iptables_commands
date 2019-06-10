@@ -1,0 +1,12 @@
+=> Block IP address
+iptables -A INPUT -s IP-ADDRESS -j DROP
+
+=> Delete rules:
+sudo iptables -D INPUT 1
+
+=> Flush rules:
+sudo iptables -F INPUT
+
+=> List:
+sudo iptables -L
+

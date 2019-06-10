@@ -53,7 +53,7 @@ int main() {
 	int proxy;
 	char buffer[_LEN];
 
-	printf("================ SERVER - TCP =================\n\n");
+	printf("================ PROXY - TCP =================\n\n");
 
 	int sck = socket(AF_INET, SOCK_STREAM, 0);
 	if (sck == -1)
@@ -83,7 +83,8 @@ int main() {
 	listen(sck, 1);
 	int serverSize = sizeof(server);
 
-	while (1) {
+	_running = true;
+	while (_running) {
 		if ((proxy = accept(sck, (struct sockaddr*) &server, &serverSize)) == -1) {
 			printf("\nA problem occurred while receiving a new connection!\n");
 			exit(1);
@@ -92,7 +93,7 @@ int main() {
 		}
 
 		memset(buffer, 0x0, _LEN);
-		printf("Listening to LAN connections...\n\n");
+		printf("Waiting for new LAN connections...\n\n");
 
 		int bufferSize;
 		if ((bufferSize = recv(proxy, buffer, _LEN, 0)) > 0) {
