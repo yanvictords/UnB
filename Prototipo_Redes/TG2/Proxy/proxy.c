@@ -35,9 +35,9 @@ void putAddrInBlackList (char * ipAddr) {
 
 void setBlackRule (char * ipAddr) {
 	char rule[100];
-	strcat(rule, "iptables -A INPUT -s ");
+	strcat(rule, "sudo route add -host ");
 	strcat(rule, ipAddr);
-	strcat(rule, " -j DROP");
+	strcat(rule, " reject");
 
 	system(rule);
 }

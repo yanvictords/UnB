@@ -1,0 +1,104 @@
+// Criando uma nova interface
+https://linuxconfig.org/configuring-virtual-network-interfaces-in-linux
+
+// TG:
+=> Block IP address
+iptables -A INPUT -s IP-ADDRESS -j DROP
+
+=> Delete rules:
+sudo iptables -D INPUT 1
+
+=> Flush rules:
+sudo iptables -F INPUT
+
+=> List:
+sudo iptables -L
+
+=> Redirect proxy:
+sudo echo 1 > /proc/sys/net/ipv4/ip_forward
+iptables -t nat -A PREROUTING -p udp --dport 3000 -j DNAT --to-destination 192.168.25.13
+iptables -t nat -A POSTROUTING -j MASQUERADE
+
+OBS: Só não podemos esquecer que o encaminhamento de pacotes deve ser ativado. Comando:
+
+sudo echo 1 > /proc/sys/net/ipv4/ip_forward
+echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
+
+// Criando encaminhamento de portas no ip tables
+iptables -A INPUT -p udp -m udp --dport 3000 -j ACCEPT
+
+// máquinas diferentes
+iptables -t nat -A PREROUTING -p udp --dport 5000 -j DNAT --to-destination 192.168.25.10:5000
+iptables -t nat -A POSTROUTING -p udp --dport 9000 -j SNAT --to-source 192.168.25.6
+iptables -t nat -A POSTROUTING -j MASQUERADE
+worked:
+iptables -t nat -A PREROUTING -s 192.168.25.0/24 -p udp --sport 2000 -j DNAT --to-destination 192.168.25.10:5000
+iptables -t nat -A PREROUTING -p udp --sport 4000 -j DNAT --to-destination 192.168.25.10:5000
+
+// mesma máquina
+iptables -t nat -A OUTPUT -p udp --dport 3000 -j REDIRECT --to-ports 9000
+iptables -t nat -A OUTPUT -p udp --sport 3000 -j REDIRECT --to-ports 9000
+
+iptables -t nat -A OUTPUT -p udp --sport 4000 -j DNAT --to-destination 192.168.25.10:5000
+
+
+//funcionam:
+// ouvir: [local] OUTPUT... [fora] PREROUTING
+// redirecionar: [local] REDIRECT... [fora] DNAT]
+
+// outra máquina -> outra porta nesta máquina
+iptables -t nat -A PREROUTING -p udp --dport 3000 -j REDIRECT --to-port 9000
+
+// local port -> outra máquina+port
+iptables -t nat -A PREROUTING -p udp --dport 3000 -j REDIRECT --to-port 9000
+
+// testes
+iptables -t nat -A PREROUTING -i wlp2s0 -p udp --sport 53 -j DNAT --to-destination 192.168.25.6:9000
+
+// Excluir regra NAT
+sudo iptables -t nat -L -n -v
+sudo iptables -L -t nat --line-numbers
+sudo iptables -t nat -D PREROUTING 1
+sudo iptables -t nat -D POSTROUTING 1
+
+// Mascarar tráfego
+iptables -t nat -A POSTROUTING -s 192.168.25.2 -o wlp2s0 -j MASQUERADE
+
+
+
+como recuperar porta de destino:
+https://stackoverflow.com/questions/5615579/how-to-get-original-destination-port-of-redirected-udp-message/5814636#5814636
+getdestaddr_iptables()
+https://unix.stackexchange.com/questions/166692/how-does-a-transparent-socks-proxy-know-which-destination-ip-to-use
+
+multiport:
+iptables -t nat -A PREROUTING -d 192.168.1.5 -p tcp -m multiport --dports 80,443 -j DNAT --to-destination 192.168.1.110:3128
+
+Arp table:
+/proc/net/arp
+
+------------- ROUTER Commands
+
+route add default gw ip
+route del default gw ip
+/etc/init.d/networking restart
+
+tabela de roteamento do kernel:
+route -n
+
+o que funcionou:
+*máquina cliente/refletor:
+~ sudo ip route add server_ip via proxy_ip -> adiciona o desvio para o proxy
+~ sudo route del -net 192.168.25.0/24 -> retira roteador 0.0.0.0
+~ route add default gw 192.168.25.1 -> retira gateway padrão
+~ /etc/init.d/networking restart
+
+del: sudo ip route del server_ip via proxy_ip
+
+*proxy:
+~ sudo su
+~ sudo echo 1 > /proc/sys/net/ipv4/ip_forward
+
+*drop:
+add: sudo route add -host reflector_ip reject
+del: sudo route del -host reflector_ip reject
