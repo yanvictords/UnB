@@ -1,9 +1,8 @@
-// Code logic inspired by Author : Silver Moon (m00n.silv3r@gmail.com)
+// The code was inspired in Silver Moon's code > DnsPackage
 
 #include "dnsPackage.h"
 
-void mountDnsPackage(unsigned char queryOrResponse, char * buf, char * host)
-{
+void mountDnsPackage (unsigned char queryOrResponse, char * buf, char * host) {
 	char *name;
     struct DNS_H *dns = NULL;
     struct QUESTION *info = NULL;
@@ -29,13 +28,10 @@ void mountDnsPackage(unsigned char queryOrResponse, char * buf, char * host)
     int lock = 0 , i;
     strcat((char*)host,".");
      
-    for(i = 0 ; i < strlen((char*)host) ; i++) 
-    {
-        if(host[i]=='.') 
-        {
+    for (i = 0 ; i < strlen((char*)host) ; i++) {
+        if (host[i]=='.') {
             *name++ = i-lock;
-            for(;lock<i;lock++) 
-            {
+            for (;lock<i;lock++) {
                 *name++=host[lock];
             }
             lock++;

@@ -1,25 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
-#include <inttypes.h>
-#include <stdbool.h>
-#include <arpa/inet.h>
-
 #include "dnsPackage.h"
 
 #define _DNS_PORT 5003
 
-#define _VICTIM_PORT 8000
-#define _VICTIM_ADDRESS "127.0.0.1"
+#define _VICTIM_PORT 3000
+#define _VICTIM_ADDRESS "192.168.25.6"
 
 #define _LEN 65500
 
-struct sockaddr_in attacker;
-struct sockaddr_in victim;
+struct sockaddr_in attacker, victim;
 
 void startAttack();
 void checkSocket();
@@ -27,3 +15,4 @@ void toAttack();
 void bindPort();
 
 int sck;
+_Bool _running;

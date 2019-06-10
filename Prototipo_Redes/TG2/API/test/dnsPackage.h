@@ -1,18 +1,7 @@
 // Code logic inspired by Author : Silver Moon (m00n.silv3r@gmail.com)
 //Dated : 29/4/2009
 //CÓDIGO ALTERADO POR YAN VICTOR DOS SANTOS PARA FINS DE TESTES
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
-#include <inttypes.h>
-#include <arpa/inet.h>
-#include <unistd.h>
+#include "essential.h"
 
 typedef uint8_t u1;
 typedef uint16_t u2;
