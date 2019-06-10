@@ -90,7 +90,7 @@ o que funcionou:
 *máquina cliente/refletor:
 ~ sudo ip route add server_ip via proxy_ip -> adiciona o desvio para o proxy
 ~ sudo route del -net 192.168.25.0/24 -> retira roteador 0.0.0.0
-~ route add default gw 192.168.25.1 -> retira gateway padrão
+~ route del default gw 192.168.25.1 -> retira gateway padrão
 ~ /etc/init.d/networking restart
 
 del: sudo ip route del server_ip via proxy_ip
