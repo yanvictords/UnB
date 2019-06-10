@@ -1,3 +1,7 @@
+// Universidade de Brasília
+// Author: Yan Victor
+// Resume: This server represents any LAN service (UDP)
+
 #include "server.h"
 
 int main()
