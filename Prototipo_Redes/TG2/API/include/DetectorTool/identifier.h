@@ -8,7 +8,7 @@
 #define _UNKNOWN_PROTOCOL 0
 
 //===== PROTOCOLS PORTS
-#define _DNS_PORT 5003
+#define _DNS_PORT 53
 #define _NTP_PORT 123
 #define _SNMP_PORT 161
 #define _SSDP_PORT 1900

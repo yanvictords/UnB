@@ -38,9 +38,7 @@ int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) 
 	if ((localNetHost && operation == _REQUEST) || (!localNetHost && operation == _RESPONSE)) {		
 		long long counter = record(addr.sin_addr, operation, protocol);
 
-			if (_DEBUG_MODE) {
-				printAllCounters(protocol);
-			}	
+		printAllCounters(protocol);
 
 		// Is useful to analyze the counter only when is a WAN response
 		if (!localNetHost) {

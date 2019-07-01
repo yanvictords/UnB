@@ -83,8 +83,9 @@ route add default gw ip
 route del default gw ip
 /etc/init.d/networking restart
 
-tabela de roteamento do kernel:
+tabela de roteamento do kernel e lista de ip's bloqueados:
 route -n
+route -v
 
 o que funcionou:
 *máquina cliente/refletor:
@@ -94,11 +95,29 @@ o que funcionou:
 ~ /etc/init.d/networking restart
 
 del: sudo ip route del server_ip via proxy_ip
+obs.: os comandos acima não precisam mais. Apenas direcione para o proxy como se o mesmo fosse o servidor
+
 
 *proxy:
+sudo iptables -t nat -A PREROUTING -d proxy_ip -p udp --sport 53 -j DNAT --to server_ip:server_port
+sudo iptables -t nat -L
+obs.: usar somente o comando acima no proxy funcionou. Proxy roteia sem alterar ip de origem.
+
 ~ sudo su
 ~ sudo echo 1 > /proc/sys/net/ipv4/ip_forward
+
+TSHARK:
+sudo tshark -i enp3s0 -f "src port 53"
+
 
 *drop:
 add: sudo route add -host reflector_ip reject
 del: sudo route del -host reflector_ip reject
+
+****LOG'S DE ATACANTE:
+sudo tshark -i enp3s0 -f 'host host_ip' -w level1.pcapng
+sudo iptables -A OUTPUT -p icmp -j REJECT
+
+
+analisar recursos CPU/MEMORIA e tempo que leva pra dropar em cada nível
+

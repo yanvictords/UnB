@@ -5,9 +5,6 @@
 #define _REF_ATTACK_ALERT -1
 #define _REJECT_ADDR 0
 
-//===== BORDERS
-#define _HIGH_LIMIT 500
-
 //===== MODULE
 #define _MODULE_ANALYZER "DETECTOR"
 

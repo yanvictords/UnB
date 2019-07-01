@@ -16,6 +16,7 @@
 
 //===== CONFIGURATION FILE
 #define _CONFIG_FILE "API.conf"
+#define _HIGH_LIMIT 30
 
 //===== API.conf
 char _PROXY_IP[100];

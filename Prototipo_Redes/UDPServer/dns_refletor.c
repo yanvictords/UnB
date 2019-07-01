@@ -136,13 +136,13 @@ void ngethostbyname(unsigned char *host , int query_type)
     dest.sin_port = htons(53);
 	char dnss[100];
 	printf("Digite o servidor dns: ");
-	//strcpy(dnss, "199.85.126.10");
+	strcpy(dnss, "199.85.126.10");
 	scanf("%s", dnss);
 	//printf("dns: %s\n\n", dnss);
     dest.sin_addr.s_addr = inet_addr(dnss); //dns servers
  
     cliente.sin_family = AF_INET;
-    cliente.sin_port = htons(2000);
+    cliente.sin_port = htons(3000);
 //	char dnss[100];
     cliente.sin_addr.s_addr = inet_addr("127.0.0.1"); //dns servers
 

@@ -63,6 +63,12 @@ long long record (struct in_addr sin_addr, long long operation, int protocol) {
 }
 
 bool mustKeepHostOnTheList (struct COUNT_ADDR * listAux) {
+	// // Positive counter -> greather tha 100 packets, can be dropped from the list
+	// if (listAux->count > _HIGH_LIMIT) {
+	// 	printAnotherStatus(_MODULE_RECORD, _NORMAL_OP, "Positive counter. Greather than limit defined. Removing from the list.");
+	// 	return false;
+	// }
+
 	// If there is a pendant request
 	if (listAux->count > 0) {
 		printAnotherStatus(_MODULE_RECORD, _NORMAL_OP, "Positive counter. Waiting for matching with the destiny IP address.");

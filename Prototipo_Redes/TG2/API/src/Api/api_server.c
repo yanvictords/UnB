@@ -16,6 +16,7 @@ _Bool _running;
 void initConfiguration();
 void printConfiguration();
 void startApiServer();
+_Bool queryDnsFromThisIpToRouter (_Bool isLocal, struct sockaddr_in * host);
 _Bool ifLanIpAddress(struct in_addr ipAddr);
 _Bool ifIsUdpProtocol(char * buffer);
 void * blackListSender(void * ipAddress);
@@ -97,9 +98,6 @@ void startApiServer () {
 		// Listening to for incoming packages
 		if (bufferSize = listenToPackages(_RAW_ETH, _sckRaw, buffer, _BUFFER_SIZE, hostToAnalyzer) > 0
 				&& ifIsUdpProtocol(buffer)) {	 
-			if (_DEBUG_MODE) {
-				printAllPacketContent(buffer);
-			}
 
 			_Bool isLocal = ifLanIpAddress(getSAddrFromBuffer(buffer));
 
@@ -107,7 +105,13 @@ void startApiServer () {
 			hostToAnalyzer = isLocal ? mountAddr(getDAddrFromBuffer(buffer).s_addr, getDPortFromBuffer(buffer))
 						: mountAddr(getSAddrFromBuffer(buffer).s_addr, getSPortFromBuffer(buffer));
 
-			int status = detector(*hostToAnalyzer, getPayload(buffer), isLocal);
+			int status = 0;
+			if (!queryDnsFromThisIpToRouter(isLocal, hostToAnalyzer)) {
+				if (_DEBUG_MODE) {
+					printAllPacketContent(buffer);
+				}
+				status = detector(*hostToAnalyzer, getPayload(buffer), isLocal);
+			}
 
 			// If status is -1, then the address analyzed is a reflector
 			if (status < 0) {
@@ -121,20 +125,26 @@ void startApiServer () {
 	}
 }
 
+_Bool queryDnsFromThisIpToRouter (_Bool isLocal, struct sockaddr_in * host) {
+	return isLocal && !strcmp(inet_ntoa(host->sin_addr), "192.168.15.1");
+}
+
 _Bool ifLanIpAddress (struct in_addr ipAddr) {
 	char * ip = inet_ntoa(ipAddr);
 
 	// Just for testings. The below ip address must be the client/reflector ip address used to testing
 	if (_DEBUG_MODE) {
-		_Bool localReflectors = strcmp(ip, "192.168.15.3") == 0;
+		_Bool localReflectors = strcmp(ip, "192.168.15.8") == 0;
 
 		return (!localReflectors && (strncmp("10", ip, strlen("10")) == 0
 			|| strncmp("172.16", ip, strlen("172.16")) == 0
+			// || strncmp("127.0.0", ip, strlen("127.0.0")) == 0
 			|| strncmp("192.168", ip, strlen("192.168")) == 0));
 	}
 
 	return strncmp("10", ip, strlen("10")) == 0
 		|| strncmp("172.16", ip, strlen("172.16")) == 0
+		// || strncmp("127.0.0", ip, strlen("127.0.0")) == 0
  		|| strncmp("192.168", ip, strlen("192.168")) == 0;
 }
 
