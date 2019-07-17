@@ -9,9 +9,10 @@ Esta ferramenta é capaz de detectar e identificar refletores em ataques de nega
 Arquivo de configuração:<br />
 API.conf<br />
 <br />
-Para alterar o limite de tolerância dos valores dos contadores, é preciso alterar no arquivo de configuração.<br />
-Alterações sobre o IP do Proxy e porta, também é definido pelo arquivo de configuração.<br />
-A opção de log detalhado sobre o tráfego pode ser obtida através do modo<br /> Debug, no arquivo de configuração.<br />
+No arquivo de configuração é possível alterar:
+1. o limite de tolerância dos valores dos contadores; <br />
+2. IP:porta do Proxy;<br />
+3. modo debug: opção de log detalhado sobre o tráfego.<br />
 <br />
 Execução Detector: <br />
 bash ./API/scripts/run.sh<br />
