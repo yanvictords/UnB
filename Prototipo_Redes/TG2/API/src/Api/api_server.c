@@ -6,13 +6,11 @@
 
 #define _LOW_BUFFER_SIZE 4096
 
-// ----- Global variables
 struct sockaddr_in _proxy;
 int _sckRaw;
 _Bool _running;
 
-// ----- Functions
-
+void processConfiguration();
 void initConfiguration();
 void printConfiguration();
 void startApiServer();
@@ -21,15 +19,13 @@ _Bool ifLanIpAddress(struct in_addr ipAddr);
 _Bool ifIsUdpProtocol(char * buffer);
 void * blackListSender(void * ipAddress);
 
-// ----- Main
 int main () {
 	clearConsole();
 	printf("\n***********************************************************\n");
 	printf("* Welcome to API Reflectors Detection! Author: Yan Victor *\n");
 	printf("***********************************************************\n\n");
 
-	initConfiguration();
-	printConfiguration();
+    processConfiguration();
 
 	_proxy = mountCharAddrInfors(_PROXY_IP, _PROXY_PORT);
 	
@@ -38,6 +34,11 @@ int main () {
 	
 	closeSocket(&_sckRaw);
 	return 0;
+}
+
+void processConfiguration() {
+	initConfiguration();
+	printConfiguration();
 }
 
 void initConfiguration () {
@@ -126,6 +127,7 @@ void startApiServer () {
 }
 
 _Bool queryDnsFromThisIpToRouter (_Bool isLocal, struct sockaddr_in * host) {
+    // TODO: host pode variar
 	return isLocal && !strcmp(inet_ntoa(host->sin_addr), "192.168.15.1");
 }
 

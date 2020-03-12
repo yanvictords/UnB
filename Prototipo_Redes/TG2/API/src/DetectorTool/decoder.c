@@ -7,19 +7,19 @@ long long decoder (int protocol,  char * buffer) {
 
 	switch (protocol) {
 		case _DNS:
-			operation =		getDnsQueryType(buffer);
+			operation = getDnsQueryType(buffer);
 			break;
 		case _NTP: // TODO
-			operation = 	getNtpQueryType(buffer);
+			operation = getNtpQueryType(buffer);
 			break;
 		case _SNMP: // TODO
-			operation = 	getSnmpQueryType(buffer);
+			operation = getSnmpQueryType(buffer);
 			break;
 		case _SSDP: // TODO
-			operation =		getSsdpQueryType(buffer);
+			operation =	getSsdpQueryType(buffer);
 			break;
 		default:
-			operation = 	_UNKNOWN_QUERY_TYPE;
+			operation = _UNKNOWN_QUERY_TYPE;
 	}
 
 	printQueryType(_MODULE_DECODER, operation);

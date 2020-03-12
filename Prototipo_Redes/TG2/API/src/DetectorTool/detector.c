@@ -16,31 +16,25 @@ int detector (struct sockaddr_in addr, char * buffer, bool localNetHost) {
 }
 
 int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) {
-	// Checks if the ip address is already in the blacklist
-	if (getAddrInBlackList(addr)) {
-		printGetInBlackListStatus(_MODULE_ANALYZER, _REJECT_ADDR, addr);	
-		return _REJECT_ADDR; // will be removed shortly	
+
+	if (isBlackListed(addr)) {
+		return rejectAddress();
 	}
 	
-	// Checks if the protocol can be analyzed by this framework.
-	int protocol = identifier(addr.sin_port); // gets the protocol
-
+	int protocol = identifier(addr.sin_port);
 	if (!protocol) {
 		printUnknownProtocol(_MODULE_ANALYZER);		
 		printOkStatus(_MODULE_ANALYZER, _OK);	
 		return _OK;
 	}
 
-	// Checks the operation type (REQUEST or RESPONSE)
 	long long operation = decoder(protocol, buffer);
 
-	// The operation is valid only if the package is a LAN request or WAN response
-	if ((localNetHost && operation == _REQUEST) || (!localNetHost && operation == _RESPONSE)) {		
+	if ((localNetHost && operation == _REQUEST) || (!localNetHost && operation == _RESPONSE)) {
 		long long counter = record(addr.sin_addr, operation, protocol);
 
 		printAllCounters(protocol);
 
-		// Is useful to analyze the counter only when is a WAN response
 		if (!localNetHost) {
 			return analyzePackageCounter(counter, addr, protocol);
 		}
@@ -50,13 +44,17 @@ int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) 
 	return _OK;
 }
 
+int rejectAddress () {
+    printGetInBlackListStatus(_MODULE_ANALYZER, _REJECT_ADDR, addr);
+    return _REJECT_ADDR;
+}
+
+int passBy
+
 int analyzePackageCounter (long long counter, struct sockaddr_in addr, int protocol) {
-	// If negative counter, probably the server is a reflector
+
 	if (counter < (_LOW_LIMIT * (-1))	) {
-		// This module gives us certainty if the host is even a reflector
-		// bool reflector = 	traceRouteAnalyzer(addr);	
 		printErrorStatus(_MODULE_ANALYZER, _REF_ATTACK_ALERT, "Much more replies than requests was detected (Outside->Inside).");
-		// if (reflector) 
 		printAlert(_MODULE_ANALYZER, addr, protocol, counter);
 		// else
 			//	printAlertForgedReflector(_MODULE_ANALYZER, addr, protocol, counter);
@@ -66,10 +64,10 @@ int analyzePackageCounter (long long counter, struct sockaddr_in addr, int proto
 	}
 
 	printOkStatus(_MODULE_ANALYZER, _OK);
-	return _OK; // the package can ben forwarded without problems
+	return _OK;
 }
 
-_Bool getAddrInBlackList (struct sockaddr_in addr) {
+_Bool isBlackListed (struct sockaddr_in addr) {
 	char ipAddr[4096];
 	char node_addr[4096];
 	FILE *file;
